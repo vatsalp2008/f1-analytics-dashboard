@@ -1,0 +1,2099 @@
+{
+  "season_results": {
+    "Australia": {
+      "NOR": 1,
+      "VER": 2,
+      "RUS": 3,
+      "ANT": 4,
+      "ALB": 5,
+      "STR": 6,
+      "HUL": 7,
+      "LEC": 8,
+      "PIA": 9,
+      "HAM": 10,
+      "GAS": 11,
+      "TSU": 12,
+      "OCO": 13,
+      "BEA": 14,
+      "LAW": 15,
+      "BOR": 16,
+      "ALO": 17,
+      "SAI": 18,
+      "HAD": 19,
+      "DOO": 20
+    },
+    "China": {
+      "PIA": 1,
+      "NOR": 2,
+      "RUS": 3,
+      "VER": 4,
+      "LEC": 5,
+      "HAM": 6,
+      "OCO": 7,
+      "ANT": 8,
+      "ALB": 9,
+      "BEA": 10,
+      "GAS": 11,
+      "STR": 12,
+      "SAI": 13,
+      "DOO": 14,
+      "HAD": 15,
+      "LAW": 16,
+      "BOR": 17,
+      "HUL": 18,
+      "TSU": 19,
+      "ALO": 20
+    },
+    "Japan": {
+      "VER": 1,
+      "NOR": 2,
+      "PIA": 3,
+      "LEC": 4,
+      "RUS": 5,
+      "ANT": 6,
+      "HAM": 7,
+      "HAD": 8,
+      "ALB": 9,
+      "BEA": 10,
+      "ALO": 11,
+      "TSU": 12,
+      "GAS": 13,
+      "SAI": 14,
+      "DOO": 15,
+      "HUL": 16,
+      "LAW": 17,
+      "OCO": 18,
+      "BOR": 19,
+      "STR": 20
+    },
+    "Bahrain": {
+      "PIA": 1,
+      "RUS": 2,
+      "NOR": 3,
+      "LEC": 4,
+      "HAM": 5,
+      "VER": 6,
+      "GAS": 7,
+      "OCO": 8,
+      "TSU": 9,
+      "BEA": 10,
+      "ANT": 11,
+      "ALB": 12,
+      "LAW": 13,
+      "DOO": 14,
+      "HUL": 15,
+      "HAD": 16,
+      "ALO": 17,
+      "STR": 18,
+      "BOR": 19,
+      "SAI": 20
+    },
+    "Saudi Arabia": {
+      "PIA": 1,
+      "VER": 2,
+      "LEC": 3,
+      "NOR": 4,
+      "RUS": 5,
+      "ANT": 6,
+      "HAM": 7,
+      "SAI": 8,
+      "ALB": 9,
+      "HAD": 10,
+      "LAW": 11,
+      "ALO": 12,
+      "BEA": 13,
+      "OCO": 14,
+      "HUL": 15,
+      "STR": 16,
+      "DOO": 17,
+      "BOR": 18,
+      "GAS": 19,
+      "TSU": 20
+    },
+    "Miami": {
+      "PIA": 1,
+      "NOR": 2,
+      "RUS": 3,
+      "VER": 4,
+      "ALB": 5,
+      "ANT": 6,
+      "LEC": 7,
+      "HAM": 8,
+      "SAI": 9,
+      "TSU": 10,
+      "HAD": 11,
+      "OCO": 12,
+      "GAS": 13,
+      "HUL": 14,
+      "ALO": 15,
+      "STR": 16,
+      "LAW": 17,
+      "BOR": 18,
+      "BEA": 19,
+      "DOO": 20
+    },
+    "Emilia Romagna": {
+      "VER": 1,
+      "NOR": 2,
+      "PIA": 3,
+      "HAM": 4,
+      "ALB": 5,
+      "LEC": 6,
+      "RUS": 7,
+      "SAI": 8,
+      "HAD": 9,
+      "TSU": 10,
+      "ALO": 11,
+      "HUL": 12,
+      "GAS": 13,
+      "LAW": 14,
+      "STR": 15,
+      "COL": 16,
+      "BEA": 17,
+      "BOR": 18,
+      "ANT": 19,
+      "OCO": 20
+    },
+    "Monaco": {
+      "NOR": 1,
+      "LEC": 2,
+      "PIA": 3,
+      "VER": 4,
+      "HAM": 5,
+      "HAD": 6,
+      "OCO": 7,
+      "LAW": 8,
+      "ALB": 9,
+      "SAI": 10,
+      "RUS": 11,
+      "BEA": 12,
+      "COL": 13,
+      "BOR": 14,
+      "STR": 15,
+      "HUL": 16,
+      "TSU": 17,
+      "ANT": 18,
+      "ALO": 19,
+      "GAS": 20
+    },
+    "Canada": {
+      "PIA": 1,
+      "NOR": 2,
+      "LEC": 3,
+      "RUS": 4,
+      "VER": 5,
+      "HUL": 6,
+      "HAM": 7,
+      "HAD": 8,
+      "GAS": 9,
+      "ALO": 10,
+      "LAW": 11,
+      "BOR": 12,
+      "BEA": 13,
+      "TSU": 14,
+      "SAI": 15,
+      "COL": 16,
+      "OCO": 17,
+      "ANT": 18,
+      "ALB": 19
+    },
+    "Spain": {
+      "RUS": 1,
+      "VER": 2,
+      "ANT": 3,
+      "PIA": 4,
+      "LEC": 5,
+      "HAM": 6,
+      "ALO": 7,
+      "HUL": 8,
+      "OCO": 9,
+      "SAI": 10,
+      "BEA": 11,
+      "TSU": 12,
+      "COL": 13,
+      "BOR": 14,
+      "GAS": 15,
+      "HAD": 16,
+      "STR": 17,
+      "NOR": 18,
+      "LAW": 19,
+      "ALB": 20
+    },
+    "Austria": {
+      "NOR": 1,
+      "PIA": 2,
+      "LEC": 3,
+      "HAM": 4,
+      "RUS": 5,
+      "LAW": 6,
+      "ALO": 7,
+      "BOR": 8,
+      "HUL": 9,
+      "OCO": 10,
+      "BEA": 11,
+      "HAD": 12,
+      "GAS": 13,
+      "STR": 14,
+      "COL": 15,
+      "TSU": 16,
+      "ALB": 17,
+      "VER": 18,
+      "ANT": 19,
+      "SAI": 20
+    },
+    "Britain": {
+      "NOR": 1,
+      "PIA": 2,
+      "HUL": 3,
+      "HAM": 4,
+      "VER": 5,
+      "GAS": 6,
+      "STR": 7,
+      "ALB": 8,
+      "ALO": 9,
+      "RUS": 10,
+      "BEA": 11,
+      "SAI": 12,
+      "OCO": 13,
+      "LEC": 14,
+      "TSU": 15,
+      "ANT": 16,
+      "HAD": 17,
+      "BOR": 18,
+      "LAW": 19,
+      "COL": 20
+    },
+    "Hungary": {
+      "PIA": 1,
+      "NOR": 2,
+      "LEC": 3,
+      "VER": 4,
+      "RUS": 5,
+      "ALB": 6,
+      "HAM": 7,
+      "LAW": 8,
+      "BOR": 9,
+      "GAS": 10,
+      "BEA": 11,
+      "HUL": 12,
+      "TSU": 13,
+      "STR": 14,
+      "OCO": 15,
+      "ANT": 16,
+      "ALO": 17,
+      "SAI": 18,
+      "COL": 19,
+      "HAD": 20
+    },
+    "Belgium": {
+      "NOR": 1,
+      "PIA": 2,
+      "RUS": 3,
+      "LEC": 4,
+      "ALO": 5,
+      "BOR": 6,
+      "STR": 7,
+      "LAW": 8,
+      "VER": 9,
+      "ANT": 10,
+      "HAD": 11,
+      "HAM": 12,
+      "HUL": 13,
+      "SAI": 14,
+      "ALB": 15,
+      "OCO": 16,
+      "GAS": 17,
+      "TSU": 18,
+      "COL": 19,
+      "BEA": 20
+    },
+    "Netherlands": {
+      "PIA": 1,
+      "VER": 2,
+      "HAD": 3,
+      "RUS": 4,
+      "ALB": 5,
+      "ANT": 6,
+      "BEA": 7,
+      "STR": 8,
+      "ALO": 9,
+      "TSU": 10,
+      "OCO": 11,
+      "COL": 12,
+      "LAW": 13,
+      "SAI": 14,
+      "HUL": 15,
+      "BOR": 16,
+      "GAS": 17,
+      "NOR": 18,
+      "LEC": 19,
+      "HAM": 20
+    },
+    "Italy": {
+      "VER": 1,
+      "NOR": 2,
+      "PIA": 3,
+      "LEC": 4,
+      "RUS": 5,
+      "HAM": 6,
+      "ALB": 7,
+      "ANT": 8,
+      "BOR": 9,
+      "HAD": 10,
+      "SAI": 11,
+      "BEA": 12,
+      "TSU": 13,
+      "LAW": 14,
+      "OCO": 15,
+      "GAS": 16,
+      "COL": 17,
+      "STR": 18,
+      "ALO": 19,
+      "HUL": 20
+    },
+    "Azerbaijan": {
+      "VER": 1,
+      "RUS": 2,
+      "SAI": 3,
+      "ANT": 4,
+      "LAW": 5,
+      "TSU": 6,
+      "NOR": 7,
+      "HAM": 8,
+      "LEC": 9,
+      "HAD": 10,
+      "ALB": 11,
+      "BOR": 12,
+      "BEA": 13,
+      "OCO": 14,
+      "ALO": 15,
+      "HUL": 16,
+      "STR": 17,
+      "GAS": 18,
+      "COL": 19,
+      "PIA": 20
+    },
+    "Singapore": {
+      "RUS": 1,
+      "VER": 2,
+      "NOR": 3,
+      "PIA": 4,
+      "ANT": 5,
+      "LEC": 6,
+      "HAM": 7,
+      "ALO": 8,
+      "BEA": 9,
+      "SAI": 10,
+      "HAD": 11,
+      "TSU": 12,
+      "STR": 13,
+      "ALB": 14,
+      "LAW": 15,
+      "COL": 16,
+      "BOR": 17,
+      "OCO": 18,
+      "GAS": 19,
+      "HUL": 20
+    },
+    "USA": {
+      "VER": 1,
+      "NOR": 2,
+      "LEC": 3,
+      "HAM": 4,
+      "PIA": 5,
+      "RUS": 6,
+      "TSU": 7,
+      "HUL": 8,
+      "BEA": 9,
+      "ALO": 10,
+      "LAW": 11,
+      "STR": 12,
+      "ANT": 13,
+      "ALB": 14,
+      "OCO": 15,
+      "HAD": 16,
+      "COL": 17,
+      "BOR": 18,
+      "GAS": 19,
+      "SAI": 20
+    },
+    "Mexico": {
+      "NOR": 19,
+      "LEC": 19,
+      "HAM": 19,
+      "RUS": 19,
+      "VER": 19,
+      "ANT": 19,
+      "PIA": 19,
+      "HAD": 19,
+      "BEA": 19,
+      "TSU": 19,
+      "OCO": 19,
+      "SAI": 19,
+      "HUL": 19,
+      "ALO": 19,
+      "LAW": 19,
+      "BOR": 19,
+      "ALB": 19,
+      "GAS": 19,
+      "STR": 19,
+      "COL": 19
+    }
+  },
+  "sprint_results": {
+    "China_Sprint": {
+      "HAM": 1,
+      "PIA": 2,
+      "VER": 3,
+      "RUS": 4,
+      "LEC": 5,
+      "TSU": 6,
+      "ANT": 7,
+      "NOR": 8,
+      "STR": 9,
+      "ALO": 10,
+      "ALB": 11,
+      "GAS": 12,
+      "HAD": 13,
+      "LAW": 14,
+      "BEA": 15,
+      "OCO": 16,
+      "SAI": 17,
+      "BOR": 18,
+      "HUL": 19,
+      "DOO": 20
+    },
+    "Miami_Sprint": {
+      "NOR": 1,
+      "PIA": 2,
+      "HAM": 3,
+      "VER": 4,
+      "ALB": 5,
+      "RUS": 6,
+      "STR": 7,
+      "LAW": 8,
+      "BEA": 9,
+      "TSU": 10,
+      "ANT": 11,
+      "GAS": 12,
+      "HUL": 13,
+      "HAD": 14,
+      "OCO": 15,
+      "BOR": 16,
+      "DOO": 17,
+      "ALO": 18,
+      "SAI": 19
+    },
+    "USA_Sprint": {
+      "VER": 1,
+      "RUS": 2,
+      "SAI": 3,
+      "HAM": 4,
+      "LEC": 5,
+      "ALB": 6,
+      "TSU": 7,
+      "BEA": 8,
+      "ANT": 9,
+      "LAW": 10,
+      "GAS": 11,
+      "BOR": 12,
+      "HAD": 13,
+      "HUL": 14,
+      "COL": 15,
+      "OCO": 16,
+      "STR": 17,
+      "ALO": 18,
+      "NOR": 19,
+      "PIA": 20
+    }
+  },
+  "qualifying_results": {
+    "Australia": {
+      "NOR": {
+        "position": 1.0,
+        "time": 75.096
+      },
+      "PIA": {
+        "position": 2.0,
+        "time": 75.18
+      },
+      "VER": {
+        "position": 3.0,
+        "time": 75.481
+      },
+      "RUS": {
+        "position": 4.0,
+        "time": 75.546
+      },
+      "TSU": {
+        "position": 5.0,
+        "time": 75.67
+      },
+      "ALB": {
+        "position": 6.0,
+        "time": 75.737
+      },
+      "LEC": {
+        "position": 7.0,
+        "time": 75.755
+      },
+      "HAM": {
+        "position": 8.0,
+        "time": 75.973
+      },
+      "GAS": {
+        "position": 9.0,
+        "time": 75.98
+      },
+      "SAI": {
+        "position": 10.0,
+        "time": 76.062
+      },
+      "HAD": {
+        "position": 11.0,
+        "time": 76.175
+      },
+      "ALO": {
+        "position": 12.0,
+        "time": 76.453
+      },
+      "STR": {
+        "position": 13.0,
+        "time": 76.483
+      },
+      "DOO": {
+        "position": 14.0,
+        "time": 76.863
+      },
+      "BOR": {
+        "position": 15.0,
+        "time": 77.52
+      },
+      "ANT": {
+        "position": 16.0,
+        "time": 76.525
+      },
+      "HUL": {
+        "position": 17.0,
+        "time": 76.579
+      },
+      "LAW": {
+        "position": 18.0,
+        "time": 77.094
+      },
+      "OCO": {
+        "position": 19.0,
+        "time": 77.147
+      }
+    },
+    "China": {
+      "PIA": {
+        "position": 1.0,
+        "time": 90.641
+      },
+      "RUS": {
+        "position": 2.0,
+        "time": 90.723
+      },
+      "NOR": {
+        "position": 3.0,
+        "time": 90.793
+      },
+      "VER": {
+        "position": 4.0,
+        "time": 90.817
+      },
+      "HAM": {
+        "position": 5.0,
+        "time": 90.927
+      },
+      "LEC": {
+        "position": 6.0,
+        "time": 91.021
+      },
+      "HAD": {
+        "position": 7.0,
+        "time": 91.079
+      },
+      "ANT": {
+        "position": 8.0,
+        "time": 91.103
+      },
+      "TSU": {
+        "position": 9.0,
+        "time": 91.638
+      },
+      "ALB": {
+        "position": 10.0,
+        "time": 91.706
+      },
+      "OCO": {
+        "position": 11.0,
+        "time": 91.625
+      },
+      "HUL": {
+        "position": 12.0,
+        "time": 91.632
+      },
+      "ALO": {
+        "position": 13.0,
+        "time": 91.688
+      },
+      "STR": {
+        "position": 14.0,
+        "time": 91.773
+      },
+      "SAI": {
+        "position": 15.0,
+        "time": 91.84
+      },
+      "GAS": {
+        "position": 16.0,
+        "time": 91.992
+      },
+      "BEA": {
+        "position": 17.0,
+        "time": 92.018
+      },
+      "DOO": {
+        "position": 18.0,
+        "time": 92.092
+      },
+      "BOR": {
+        "position": 19.0,
+        "time": 92.141
+      },
+      "LAW": {
+        "position": 20.0,
+        "time": 92.174
+      }
+    },
+    "Japan": {
+      "VER": {
+        "position": 1.0,
+        "time": 86.983
+      },
+      "NOR": {
+        "position": 2.0,
+        "time": 86.995
+      },
+      "PIA": {
+        "position": 3.0,
+        "time": 87.027
+      },
+      "LEC": {
+        "position": 4.0,
+        "time": 87.299
+      },
+      "RUS": {
+        "position": 5.0,
+        "time": 87.318
+      },
+      "ANT": {
+        "position": 6.0,
+        "time": 87.555
+      },
+      "HAD": {
+        "position": 7.0,
+        "time": 87.569
+      },
+      "HAM": {
+        "position": 8.0,
+        "time": 87.61
+      },
+      "ALB": {
+        "position": 9.0,
+        "time": 87.615
+      },
+      "BEA": {
+        "position": 10.0,
+        "time": 87.867
+      },
+      "GAS": {
+        "position": 11.0,
+        "time": 87.822
+      },
+      "SAI": {
+        "position": 12.0,
+        "time": 87.836
+      },
+      "ALO": {
+        "position": 13.0,
+        "time": 87.897
+      },
+      "LAW": {
+        "position": 14.0,
+        "time": 87.906
+      },
+      "TSU": {
+        "position": 15.0,
+        "time": 88.0
+      },
+      "HUL": {
+        "position": 16.0,
+        "time": 88.57
+      },
+      "BOR": {
+        "position": 17.0,
+        "time": 88.622
+      },
+      "OCO": {
+        "position": 18.0,
+        "time": 88.696
+      },
+      "DOO": {
+        "position": 19.0,
+        "time": 88.877
+      },
+      "STR": {
+        "position": 20.0,
+        "time": 89.271
+      }
+    },
+    "Bahrain": {
+      "PIA": {
+        "position": 1.0,
+        "time": 89.841
+      },
+      "RUS": {
+        "position": 2.0,
+        "time": 90.009
+      },
+      "LEC": {
+        "position": 3.0,
+        "time": 90.175
+      },
+      "ANT": {
+        "position": 4.0,
+        "time": 90.213
+      },
+      "GAS": {
+        "position": 5.0,
+        "time": 90.216
+      },
+      "NOR": {
+        "position": 6.0,
+        "time": 90.267
+      },
+      "VER": {
+        "position": 7.0,
+        "time": 90.423
+      },
+      "SAI": {
+        "position": 8.0,
+        "time": 90.68
+      },
+      "HAM": {
+        "position": 9.0,
+        "time": 90.772
+      },
+      "TSU": {
+        "position": 10.0,
+        "time": 91.303
+      },
+      "DOO": {
+        "position": 11.0,
+        "time": 91.245
+      },
+      "HAD": {
+        "position": 12.0,
+        "time": 91.271
+      },
+      "HUL": {
+        "position": 13.0,
+        "time": 91.693
+      },
+      "ALO": {
+        "position": 14.0,
+        "time": 91.886
+      },
+      "OCO": {
+        "position": 15.0,
+        "time": 91.594
+      },
+      "ALB": {
+        "position": 16.0,
+        "time": 92.04
+      },
+      "LAW": {
+        "position": 17.0,
+        "time": 92.165
+      },
+      "BOR": {
+        "position": 18.0,
+        "time": 92.186
+      },
+      "STR": {
+        "position": 19.0,
+        "time": 92.283
+      },
+      "BEA": {
+        "position": 20.0,
+        "time": 92.373
+      }
+    },
+    "Saudi Arabia": {
+      "VER": {
+        "position": 1.0,
+        "time": 87.294
+      },
+      "PIA": {
+        "position": 2.0,
+        "time": 87.304
+      },
+      "RUS": {
+        "position": 3.0,
+        "time": 87.407
+      },
+      "LEC": {
+        "position": 4.0,
+        "time": 87.67
+      },
+      "ANT": {
+        "position": 5.0,
+        "time": 87.866
+      },
+      "SAI": {
+        "position": 6.0,
+        "time": 88.164
+      },
+      "HAM": {
+        "position": 7.0,
+        "time": 88.201
+      },
+      "TSU": {
+        "position": 8.0,
+        "time": 88.204
+      },
+      "GAS": {
+        "position": 9.0,
+        "time": 88.367
+      },
+      "NOR": {
+        "position": 10.0,
+        "time": 87.481
+      },
+      "ALB": {
+        "position": 11.0,
+        "time": 88.109
+      },
+      "LAW": {
+        "position": 12.0,
+        "time": 88.191
+      },
+      "ALO": {
+        "position": 13.0,
+        "time": 88.303
+      },
+      "HAD": {
+        "position": 14.0,
+        "time": 88.418
+      },
+      "BEA": {
+        "position": 15.0,
+        "time": 88.648
+      },
+      "STR": {
+        "position": 16.0,
+        "time": 88.645
+      },
+      "DOO": {
+        "position": 17.0,
+        "time": 88.739
+      },
+      "HUL": {
+        "position": 18.0,
+        "time": 88.782
+      },
+      "OCO": {
+        "position": 19.0,
+        "time": 89.092
+      },
+      "BOR": {
+        "position": 20.0,
+        "time": 89.462
+      }
+    },
+    "Miami": {
+      "VER": {
+        "position": 1.0,
+        "time": 86.204
+      },
+      "NOR": {
+        "position": 2.0,
+        "time": 86.269
+      },
+      "ANT": {
+        "position": 3.0,
+        "time": 86.271
+      },
+      "PIA": {
+        "position": 4.0,
+        "time": 86.375
+      },
+      "RUS": {
+        "position": 5.0,
+        "time": 86.385
+      },
+      "SAI": {
+        "position": 6.0,
+        "time": 86.569
+      },
+      "ALB": {
+        "position": 7.0,
+        "time": 86.682
+      },
+      "LEC": {
+        "position": 8.0,
+        "time": 86.754
+      },
+      "OCO": {
+        "position": 9.0,
+        "time": 86.824
+      },
+      "TSU": {
+        "position": 10.0,
+        "time": 86.943
+      },
+      "HAD": {
+        "position": 11.0,
+        "time": 86.987
+      },
+      "HAM": {
+        "position": 12.0,
+        "time": 87.006
+      },
+      "BOR": {
+        "position": 13.0,
+        "time": 87.151
+      },
+      "DOO": {
+        "position": 14.0,
+        "time": 87.186
+      },
+      "LAW": {
+        "position": 15.0,
+        "time": 87.363
+      },
+      "HUL": {
+        "position": 16.0,
+        "time": 87.473
+      },
+      "ALO": {
+        "position": 17.0,
+        "time": 87.604
+      },
+      "GAS": {
+        "position": 18.0,
+        "time": 87.71
+      },
+      "STR": {
+        "position": 19.0,
+        "time": 87.83
+      },
+      "BEA": {
+        "position": 20.0,
+        "time": 87.999
+      }
+    },
+    "Emilia Romagna": {
+      "PIA": {
+        "position": 1.0,
+        "time": 74.67
+      },
+      "VER": {
+        "position": 2.0,
+        "time": 74.704
+      },
+      "RUS": {
+        "position": 3.0,
+        "time": 74.807
+      },
+      "NOR": {
+        "position": 4.0,
+        "time": 74.962
+      },
+      "ALO": {
+        "position": 5.0,
+        "time": 75.431
+      },
+      "SAI": {
+        "position": 6.0,
+        "time": 75.432
+      },
+      "ALB": {
+        "position": 7.0,
+        "time": 75.473
+      },
+      "STR": {
+        "position": 8.0,
+        "time": 75.581
+      },
+      "HAD": {
+        "position": 9.0,
+        "time": 75.746
+      },
+      "GAS": {
+        "position": 10.0,
+        "time": 75.787
+      },
+      "LEC": {
+        "position": 11.0,
+        "time": 75.604
+      },
+      "HAM": {
+        "position": 12.0,
+        "time": 75.765
+      },
+      "ANT": {
+        "position": 13.0,
+        "time": 75.772
+      },
+      "BOR": {
+        "position": 14.0,
+        "time": 76.26
+      },
+      "BEA": {
+        "position": 15.0,
+        "time": 76.077
+      },
+      "COL": {
+        "position": 16.0,
+        "time": 76.256
+      },
+      "LAW": {
+        "position": 17.0,
+        "time": 76.379
+      },
+      "HUL": {
+        "position": 18.0,
+        "time": 76.518
+      },
+      "OCO": {
+        "position": 19.0,
+        "time": 76.613
+      }
+    },
+    "Monaco": {
+      "NOR": {
+        "position": 1.0,
+        "time": 69.954
+      },
+      "LEC": {
+        "position": 2.0,
+        "time": 70.063
+      },
+      "PIA": {
+        "position": 3.0,
+        "time": 70.129
+      },
+      "HAM": {
+        "position": 4.0,
+        "time": 70.382
+      },
+      "VER": {
+        "position": 5.0,
+        "time": 70.669
+      },
+      "HAD": {
+        "position": 6.0,
+        "time": 70.923
+      },
+      "ALO": {
+        "position": 7.0,
+        "time": 70.924
+      },
+      "OCO": {
+        "position": 8.0,
+        "time": 70.942
+      },
+      "LAW": {
+        "position": 9.0,
+        "time": 71.129
+      },
+      "ALB": {
+        "position": 10.0,
+        "time": 71.213
+      },
+      "SAI": {
+        "position": 11.0,
+        "time": 71.362
+      },
+      "TSU": {
+        "position": 12.0,
+        "time": 71.415
+      },
+      "HUL": {
+        "position": 13.0,
+        "time": 71.596
+      },
+      "RUS": {
+        "position": 14.0,
+        "time": 71.507
+      },
+      "ANT": {
+        "position": 15.0,
+        "time": 71.88
+      },
+      "BOR": {
+        "position": 16.0,
+        "time": 71.902
+      },
+      "BEA": {
+        "position": 17.0,
+        "time": 71.979
+      },
+      "GAS": {
+        "position": 18.0,
+        "time": 71.994
+      },
+      "STR": {
+        "position": 19.0,
+        "time": 72.563
+      },
+      "COL": {
+        "position": 20.0,
+        "time": 72.597
+      }
+    },
+    "Canada": {
+      "PIA": {
+        "position": 1.0,
+        "time": 71.546
+      },
+      "NOR": {
+        "position": 2.0,
+        "time": 71.755
+      },
+      "VER": {
+        "position": 3.0,
+        "time": 71.848
+      },
+      "RUS": {
+        "position": 4.0,
+        "time": 71.848
+      },
+      "HAM": {
+        "position": 5.0,
+        "time": 72.045
+      },
+      "ANT": {
+        "position": 6.0,
+        "time": 72.111
+      },
+      "LEC": {
+        "position": 7.0,
+        "time": 72.131
+      },
+      "GAS": {
+        "position": 8.0,
+        "time": 72.199
+      },
+      "HAD": {
+        "position": 9.0,
+        "time": 72.252
+      },
+      "ALO": {
+        "position": 10.0,
+        "time": 72.284
+      },
+      "ALB": {
+        "position": 11.0,
+        "time": 72.641
+      },
+      "BOR": {
+        "position": 12.0,
+        "time": 72.756
+      },
+      "LAW": {
+        "position": 13.0,
+        "time": 72.763
+      },
+      "STR": {
+        "position": 14.0,
+        "time": 73.058
+      },
+      "BEA": {
+        "position": 15.0,
+        "time": 73.315
+      },
+      "HUL": {
+        "position": 16.0,
+        "time": 73.19
+      },
+      "OCO": {
+        "position": 17.0,
+        "time": 73.201
+      },
+      "SAI": {
+        "position": 18.0,
+        "time": 73.203
+      },
+      "COL": {
+        "position": 19.0,
+        "time": 73.334
+      },
+      "TSU": {
+        "position": 20.0,
+        "time": 73.385
+      }
+    },
+    "Spain": {
+      "RUS": {
+        "position": 1.0,
+        "time": 70.899
+      },
+      "VER": {
+        "position": 2.0,
+        "time": 71.059
+      },
+      "PIA": {
+        "position": 3.0,
+        "time": 71.12
+      },
+      "ANT": {
+        "position": 4.0,
+        "time": 71.391
+      },
+      "HAM": {
+        "position": 5.0,
+        "time": 71.526
+      },
+      "ALO": {
+        "position": 6.0,
+        "time": 71.586
+      },
+      "NOR": {
+        "position": 7.0,
+        "time": 71.625
+      },
+      "LEC": {
+        "position": 8.0,
+        "time": 71.682
+      },
+      "HAD": {
+        "position": 9.0,
+        "time": 71.867
+      },
+      "ALB": {
+        "position": 10.0,
+        "time": 71.907
+      },
+      "TSU": {
+        "position": 11.0,
+        "time": 72.102
+      },
+      "COL": {
+        "position": 12.0,
+        "time": 72.142
+      },
+      "HUL": {
+        "position": 13.0,
+        "time": 72.183
+      },
+      "BEA": {
+        "position": 14.0,
+        "time": 72.34
+      },
+      "OCO": {
+        "position": 15.0,
+        "time": 72.634
+      },
+      "BOR": {
+        "position": 16.0,
+        "time": 72.385
+      },
+      "SAI": {
+        "position": 17.0,
+        "time": 72.398
+      },
+      "STR": {
+        "position": 18.0,
+        "time": 72.517
+      },
+      "LAW": {
+        "position": 19.0,
+        "time": 72.525
+      },
+      "GAS": {
+        "position": 20.0,
+        "time": 72.667
+      }
+    },
+    "Austria": {
+      "NOR": {
+        "position": 1.0,
+        "time": 63.971
+      },
+      "LEC": {
+        "position": 2.0,
+        "time": 64.492
+      },
+      "PIA": {
+        "position": 3.0,
+        "time": 64.554
+      },
+      "HAM": {
+        "position": 4.0,
+        "time": 64.582
+      },
+      "RUS": {
+        "position": 5.0,
+        "time": 64.763
+      },
+      "LAW": {
+        "position": 6.0,
+        "time": 64.926
+      },
+      "VER": {
+        "position": 7.0,
+        "time": 64.929
+      },
+      "BOR": {
+        "position": 8.0,
+        "time": 65.132
+      },
+      "ANT": {
+        "position": 9.0,
+        "time": 65.276
+      },
+      "GAS": {
+        "position": 10.0,
+        "time": 65.649
+      },
+      "ALO": {
+        "position": 11.0,
+        "time": 65.128
+      },
+      "ALB": {
+        "position": 12.0,
+        "time": 65.205
+      },
+      "HAD": {
+        "position": 13.0,
+        "time": 65.226
+      },
+      "COL": {
+        "position": 14.0,
+        "time": 65.288
+      },
+      "BEA": {
+        "position": 15.0,
+        "time": 65.312
+      },
+      "STR": {
+        "position": 16.0,
+        "time": 65.329
+      },
+      "OCO": {
+        "position": 17.0,
+        "time": 65.364
+      },
+      "TSU": {
+        "position": 18.0,
+        "time": 65.369
+      },
+      "SAI": {
+        "position": 19.0,
+        "time": 65.582
+      },
+      "HUL": {
+        "position": 20.0,
+        "time": 65.606
+      }
+    },
+    "Britain": {
+      "VER": {
+        "position": 1.0,
+        "time": 84.892
+      },
+      "PIA": {
+        "position": 2.0,
+        "time": 84.995
+      },
+      "NOR": {
+        "position": 3.0,
+        "time": 85.01
+      },
+      "RUS": {
+        "position": 4.0,
+        "time": 85.029
+      },
+      "HAM": {
+        "position": 5.0,
+        "time": 85.095
+      },
+      "LEC": {
+        "position": 6.0,
+        "time": 85.121
+      },
+      "ANT": {
+        "position": 7.0,
+        "time": 85.374
+      },
+      "BEA": {
+        "position": 8.0,
+        "time": 85.471
+      },
+      "ALO": {
+        "position": 9.0,
+        "time": 85.621
+      },
+      "GAS": {
+        "position": 10.0,
+        "time": 85.785
+      },
+      "SAI": {
+        "position": 11.0,
+        "time": 85.746
+      },
+      "TSU": {
+        "position": 12.0,
+        "time": 85.826
+      },
+      "HAD": {
+        "position": 13.0,
+        "time": 85.864
+      },
+      "ALB": {
+        "position": 14.0,
+        "time": 85.889
+      },
+      "OCO": {
+        "position": 15.0,
+        "time": 85.95
+      },
+      "LAW": {
+        "position": 16.0,
+        "time": 86.44
+      },
+      "BOR": {
+        "position": 17.0,
+        "time": 86.446
+      },
+      "STR": {
+        "position": 18.0,
+        "time": 86.504
+      },
+      "HUL": {
+        "position": 19.0,
+        "time": 86.574
+      },
+      "COL": {
+        "position": 20.0,
+        "time": 87.06
+      }
+    },
+    "Hungary": {
+      "NOR": {
+        "position": 1.0,
+        "time": 100.562
+      },
+      "PIA": {
+        "position": 2.0,
+        "time": 100.647
+      },
+      "LEC": {
+        "position": 3.0,
+        "time": 100.9
+      },
+      "VER": {
+        "position": 4.0,
+        "time": 100.903
+      },
+      "ALB": {
+        "position": 5.0,
+        "time": 101.201
+      },
+      "RUS": {
+        "position": 6.0,
+        "time": 101.26
+      },
+      "TSU": {
+        "position": 7.0,
+        "time": 101.284
+      },
+      "HAD": {
+        "position": 8.0,
+        "time": 101.31
+      },
+      "LAW": {
+        "position": 9.0,
+        "time": 101.328
+      },
+      "BOR": {
+        "position": 10.0,
+        "time": 102.387
+      },
+      "OCO": {
+        "position": 11.0,
+        "time": 101.525
+      },
+      "BEA": {
+        "position": 12.0,
+        "time": 101.617
+      },
+      "GAS": {
+        "position": 13.0,
+        "time": 101.633
+      },
+      "HUL": {
+        "position": 14.0,
+        "time": 101.707
+      },
+      "SAI": {
+        "position": 15.0,
+        "time": 101.758
+      },
+      "HAM": {
+        "position": 16.0,
+        "time": 101.939
+      },
+      "COL": {
+        "position": 17.0,
+        "time": 102.022
+      },
+      "ANT": {
+        "position": 18.0,
+        "time": 102.139
+      },
+      "ALO": {
+        "position": 19.0,
+        "time": 102.385
+      },
+      "STR": {
+        "position": 20.0,
+        "time": 102.502
+      }
+    },
+    "Belgium": {
+      "LEC": {
+        "position": 1.0,
+        "time": 75.372
+      },
+      "PIA": {
+        "position": 2.0,
+        "time": 75.398
+      },
+      "NOR": {
+        "position": 3.0,
+        "time": 75.413
+      },
+      "RUS": {
+        "position": 4.0,
+        "time": 75.425
+      },
+      "ALO": {
+        "position": 5.0,
+        "time": 75.481
+      },
+      "STR": {
+        "position": 6.0,
+        "time": 75.498
+      },
+      "BOR": {
+        "position": 7.0,
+        "time": 75.725
+      },
+      "VER": {
+        "position": 8.0,
+        "time": 75.728
+      },
+      "LAW": {
+        "position": 9.0,
+        "time": 75.821
+      },
+      "HAD": {
+        "position": 10.0,
+        "time": 75.915
+      },
+      "BEA": {
+        "position": 11.0,
+        "time": 75.694
+      },
+      "HAM": {
+        "position": 12.0,
+        "time": 75.702
+      },
+      "SAI": {
+        "position": 13.0,
+        "time": 75.781
+      },
+      "COL": {
+        "position": 14.0,
+        "time": 76.159
+      },
+      "ANT": {
+        "position": 15.0,
+        "time": 76.386
+      },
+      "TSU": {
+        "position": 16.0,
+        "time": 75.899
+      },
+      "GAS": {
+        "position": 17.0,
+        "time": 75.966
+      },
+      "OCO": {
+        "position": 18.0,
+        "time": 76.023
+      },
+      "HUL": {
+        "position": 19.0,
+        "time": 76.081
+      },
+      "ALB": {
+        "position": 20.0,
+        "time": 76.223
+      }
+    },
+    "Netherlands": {
+      "PIA": {
+        "position": 1.0,
+        "time": 68.662
+      },
+      "NOR": {
+        "position": 2.0,
+        "time": 68.674
+      },
+      "VER": {
+        "position": 3.0,
+        "time": 68.925
+      },
+      "HAD": {
+        "position": 4.0,
+        "time": 69.208
+      },
+      "RUS": {
+        "position": 5.0,
+        "time": 69.255
+      },
+      "LEC": {
+        "position": 6.0,
+        "time": 69.34
+      },
+      "HAM": {
+        "position": 7.0,
+        "time": 69.39
+      },
+      "LAW": {
+        "position": 8.0,
+        "time": 69.5
+      },
+      "SAI": {
+        "position": 9.0,
+        "time": 69.505
+      },
+      "ALO": {
+        "position": 10.0,
+        "time": 69.63
+      },
+      "ANT": {
+        "position": 11.0,
+        "time": 69.493
+      },
+      "TSU": {
+        "position": 12.0,
+        "time": 69.622
+      },
+      "BOR": {
+        "position": 13.0,
+        "time": 69.622
+      },
+      "GAS": {
+        "position": 14.0,
+        "time": 69.637
+      },
+      "ALB": {
+        "position": 15.0,
+        "time": 69.652
+      },
+      "COL": {
+        "position": 16.0,
+        "time": 70.104
+      },
+      "HUL": {
+        "position": 17.0,
+        "time": 70.195
+      },
+      "OCO": {
+        "position": 18.0,
+        "time": 70.197
+      },
+      "BEA": {
+        "position": 19.0,
+        "time": 70.262
+      }
+    },
+    "Italy": {
+      "VER": {
+        "position": 1.0,
+        "time": 78.792
+      },
+      "NOR": {
+        "position": 2.0,
+        "time": 78.869
+      },
+      "PIA": {
+        "position": 3.0,
+        "time": 78.982
+      },
+      "LEC": {
+        "position": 4.0,
+        "time": 79.007
+      },
+      "HAM": {
+        "position": 5.0,
+        "time": 79.124
+      },
+      "RUS": {
+        "position": 6.0,
+        "time": 79.157
+      },
+      "ANT": {
+        "position": 7.0,
+        "time": 79.2
+      },
+      "BOR": {
+        "position": 8.0,
+        "time": 79.39
+      },
+      "ALO": {
+        "position": 9.0,
+        "time": 79.424
+      },
+      "TSU": {
+        "position": 10.0,
+        "time": 79.519
+      },
+      "BEA": {
+        "position": 11.0,
+        "time": 79.446
+      },
+      "HUL": {
+        "position": 12.0,
+        "time": 79.498
+      },
+      "SAI": {
+        "position": 13.0,
+        "time": 79.528
+      },
+      "ALB": {
+        "position": 14.0,
+        "time": 79.583
+      },
+      "OCO": {
+        "position": 15.0,
+        "time": 79.707
+      },
+      "HAD": {
+        "position": 16.0,
+        "time": 79.917
+      },
+      "STR": {
+        "position": 17.0,
+        "time": 79.948
+      },
+      "COL": {
+        "position": 18.0,
+        "time": 79.992
+      },
+      "GAS": {
+        "position": 19.0,
+        "time": 80.103
+      },
+      "LAW": {
+        "position": 20.0,
+        "time": 80.279
+      }
+    },
+    "Azerbaijan": {
+      "VER": {
+        "position": 1.0,
+        "time": 101.117
+      },
+      "SAI": {
+        "position": 2.0,
+        "time": 101.595
+      },
+      "LAW": {
+        "position": 3.0,
+        "time": 101.707
+      },
+      "ANT": {
+        "position": 4.0,
+        "time": 101.717
+      },
+      "RUS": {
+        "position": 5.0,
+        "time": 102.07
+      },
+      "TSU": {
+        "position": 6.0,
+        "time": 102.143
+      },
+      "NOR": {
+        "position": 7.0,
+        "time": 102.239
+      },
+      "HAD": {
+        "position": 8.0,
+        "time": 102.372
+      },
+      "PIA": {
+        "position": 9.0,
+        "time": 101.414
+      },
+      "LEC": {
+        "position": 10.0,
+        "time": 101.519
+      },
+      "ALO": {
+        "position": 11.0,
+        "time": 101.857
+      },
+      "HAM": {
+        "position": 12.0,
+        "time": 102.183
+      },
+      "BOR": {
+        "position": 13.0,
+        "time": 102.277
+      },
+      "STR": {
+        "position": 14.0,
+        "time": 103.061
+      },
+      "BEA": {
+        "position": 15.0,
+        "time": 102.666
+      },
+      "COL": {
+        "position": 16.0,
+        "time": 102.779
+      },
+      "HUL": {
+        "position": 17.0,
+        "time": 102.916
+      },
+      "OCO": {
+        "position": 18.0,
+        "time": 103.004
+      },
+      "GAS": {
+        "position": 19.0,
+        "time": 103.139
+      },
+      "ALB": {
+        "position": 20.0,
+        "time": 103.778
+      }
+    },
+    "Singapore": {
+      "RUS": {
+        "position": 1.0,
+        "time": 89.158
+      },
+      "VER": {
+        "position": 2.0,
+        "time": 89.34
+      },
+      "PIA": {
+        "position": 3.0,
+        "time": 89.524
+      },
+      "ANT": {
+        "position": 4.0,
+        "time": 89.537
+      },
+      "NOR": {
+        "position": 5.0,
+        "time": 89.586
+      },
+      "HAM": {
+        "position": 6.0,
+        "time": 89.688
+      },
+      "LEC": {
+        "position": 7.0,
+        "time": 89.784
+      },
+      "HAD": {
+        "position": 8.0,
+        "time": 89.846
+      },
+      "BEA": {
+        "position": 9.0,
+        "time": 89.868
+      },
+      "ALO": {
+        "position": 10.0,
+        "time": 89.955
+      },
+      "HUL": {
+        "position": 11.0,
+        "time": 90.141
+      },
+      "ALB": {
+        "position": 12.0,
+        "time": 90.202
+      },
+      "SAI": {
+        "position": 13.0,
+        "time": 90.235
+      },
+      "LAW": {
+        "position": 14.0,
+        "time": 90.32
+      },
+      "TSU": {
+        "position": 15.0,
+        "time": 90.353
+      },
+      "BOR": {
+        "position": 16.0,
+        "time": 90.82
+      },
+      "STR": {
+        "position": 17.0,
+        "time": 90.949
+      },
+      "COL": {
+        "position": 18.0,
+        "time": 90.982
+      },
+      "OCO": {
+        "position": 19.0,
+        "time": 90.989
+      },
+      "GAS": {
+        "position": 20.0,
+        "time": 91.261
+      }
+    },
+    "USA": {
+      "VER": {
+        "position": 1.0,
+        "time": 92.51
+      },
+      "NOR": {
+        "position": 2.0,
+        "time": 92.801
+      },
+      "LEC": {
+        "position": 3.0,
+        "time": 92.807
+      },
+      "RUS": {
+        "position": 4.0,
+        "time": 92.826
+      },
+      "HAM": {
+        "position": 5.0,
+        "time": 92.912
+      },
+      "PIA": {
+        "position": 6.0,
+        "time": 93.084
+      },
+      "ANT": {
+        "position": 7.0,
+        "time": 93.114
+      },
+      "BEA": {
+        "position": 8.0,
+        "time": 93.139
+      },
+      "SAI": {
+        "position": 9.0,
+        "time": 93.15
+      },
+      "ALO": {
+        "position": 10.0,
+        "time": 93.16
+      },
+      "HUL": {
+        "position": 11.0,
+        "time": 93.334
+      },
+      "LAW": {
+        "position": 12.0,
+        "time": 93.36
+      },
+      "TSU": {
+        "position": 13.0,
+        "time": 93.466
+      },
+      "GAS": {
+        "position": 14.0,
+        "time": 93.651
+      },
+      "COL": {
+        "position": 15.0,
+        "time": 94.044
+      },
+      "BOR": {
+        "position": 16.0,
+        "time": 94.125
+      },
+      "OCO": {
+        "position": 17.0,
+        "time": 94.136
+      },
+      "STR": {
+        "position": 18.0,
+        "time": 94.54
+      },
+      "ALB": {
+        "position": 19.0,
+        "time": 94.69
+      }
+    }
+  },
+  "fastest_laps": {
+    "Australia": "NOR",
+    "China": "HAM",
+    "Japan": "ANT",
+    "Bahrain": "PIA",
+    "Saudi Arabia": "NOR",
+    "Miami": "NOR",
+    "Emilia Romagna": "VER",
+    "Monaco": "NOR",
+    "Canada": "PIA",
+    "Spain": "RUS",
+    "Austria": "PIA",
+    "Britain": "PIA",
+    "Hungary": "ANT",
+    "Belgium": "RUS",
+    "Netherlands": "PIA",
+    "Italy": "NOR",
+    "Azerbaijan": "VER",
+    "Singapore": "HAM",
+    "USA": "ANT"
+  },
+  "driver_standings": {
+    "NOR": 331,
+    "VER": 314,
+    "RUS": 252,
+    "ANT": 93,
+    "ALB": 73,
+    "STR": 26,
+    "HUL": 39,
+    "LEC": 197,
+    "PIA": 344,
+    "HAM": 152,
+    "GAS": 17,
+    "TSU": 24,
+    "OCO": 19,
+    "BEA": 14,
+    "LAW": 31,
+    "BOR": 16,
+    "ALO": 32,
+    "SAI": 34,
+    "HAD": 36,
+    "DOO": 0,
+    "COL": 0
+  },
+  "fetch_time": "2025-11-09T01:27:07.444992"
+}
