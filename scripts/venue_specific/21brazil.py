@@ -12,7 +12,7 @@ import json
 import os
 
 # Enable FastF1 caching
-cache_dir = "f1_cache"
+cache_dir = "../../data/cache/f1_cache"
 if not os.path.exists(cache_dir):
     os.makedirs(cache_dir)
     print(f"Created cache directory: {cache_dir}")
@@ -28,7 +28,7 @@ print("="*70)
 def fetch_all_2025_races():
     """Fetch all 20 completed races of 2025 season"""
     
-    cache_file = 'f1_2025_brazil_cache.json'
+    cache_file = '../../data/f1_2025_brazil_cache.json'
     
     # Check for recent cache (24 hours)
     if os.path.exists(cache_file):
@@ -393,7 +393,7 @@ def fetch_race_day_weather():
             target_date = today + timedelta(days=days_ahead)
         
         # Try OpenWeatherMap forecast
-        url = f"http://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API_KEY}&units=metric"
+        url = f"http://api.openweathermap.o../../data/2.5/forecast?lat={lat}&lon={lon}&appid={API_KEY}&units=metric"
         response = requests.get(url, timeout=5)
         
         if response.status_code == 200:

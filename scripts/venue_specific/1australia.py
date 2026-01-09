@@ -10,7 +10,7 @@ from sklearn.impute import SimpleImputer
 from datetime import datetime
 
 # Enable FastF1 caching
-fastf1.Cache.enable_cache("f1_cache")
+fastf1.Cache.enable_cache("../../data/cache/f1_cache")
 
 print("🏁 2025 AUSTRALIAN GRAND PRIX - SEASON OPENER PREDICTION MODEL 🏁")
 print("="*70)

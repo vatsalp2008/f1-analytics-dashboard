@@ -12,7 +12,7 @@ import json
 import os
 
 # Enable FastF1 caching
-fastf1.Cache.enable_cache("f1_cache")
+fastf1.Cache.enable_cache("../../data/cache/f1_cache")
 
 print("🏁 2025 BAHRAIN GRAND PRIX - PREDICTION WITH AUTO-FETCH 🏁")
 print("="*70)
@@ -25,7 +25,7 @@ def fetch_season_data_2025():
     """Automatically fetch all completed 2025 race data"""
     
     # Check if we have recent cached data (less than 1 day old)
-    cache_file = 'f1_2025_season_cache.json'
+    cache_file = '../../data/f1_2025_season_cache.json'
     if os.path.exists(cache_file):
         mod_time = os.path.getmtime(cache_file)
         if (datetime.now().timestamp() - mod_time) < 86400:  # Less than 24 hours

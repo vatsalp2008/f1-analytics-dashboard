@@ -13,7 +13,12 @@ ENV/
 .env
 
 # FastF1 Cache
+data/cache/
+vision_output/
 f1_cache/
+.DS_Store
+f1env/
+*.json
 *.cache
 
 # IDE

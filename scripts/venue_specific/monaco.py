@@ -11,7 +11,7 @@ from datetime import datetime
 import json
 
 # Enable FastF1 caching
-fastf1.Cache.enable_cache("f1_cache")
+fastf1.Cache.enable_cache("../../data/cache/f1_cache")
 
 print("🏁 2025 MONACO GRAND PRIX - ENHANCED PREDICTION MODEL 🏁")
 print("="*70)

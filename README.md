@@ -10,6 +10,8 @@ An advanced Formula 1 race prediction system for the 2025 season that uses machi
 
 ### 🎯 Key Features
 
+- **Neural Network Modeling**: PyTorch-based Deep Learning for race result regression
+- **Computer Vision Analysis**: CNN-based analysis of track telemetry "fingerprints"
 - **Auto-fetching System**: Automatically retrieves actual 2025 race results from FastF1 API
 - **Smart Caching**: 24-hour refresh cycles to minimize API calls
 - **Progressive Model Complexity**: 8+ different prediction models with increasing sophistication
@@ -175,21 +177,21 @@ P2  NOR  Lando Norris       1:31.456    +0.222s
 ## 📁 Project Structure
 
 ```
-2025_f1_predictions/
-├── Core Predictions/
-│   ├── prediction1.py    # Australia
-│   ├── prediction2.py    # China
-│   ├── ...
-│   └── prediction8.py    # Spain
-├── Venue-Specific/
-│   ├── bahrain.py       # Advanced auto-fetch
-│   ├── monaco.py        # Street circuit
-│   ├── japanese.py      # High-speed
-│   └── chinese.py       # Sprint weekend
-├── Cache/
-│   ├── f1_cache/        # FastF1 cache
+f1-predictions-vatsal/
+├── models/
+│   ├── neural_prediction.py    # PyTorch implementation
+│   ├── vision_analysis.py      # TensorFlow + CV
+│   └── 21brazilXGBoost.py      # Advanced XGBoost
+├── scripts/
+│   ├── venue_specific/         # Bahrain, Monaco, etc.
+│   └── legacy/                 # Older prediction scripts
+├── data/
+│   ├── cache/                  # FastF1 API cache
+│   ├── f1_2025_brazil_cache.json
 │   └── f1_2025_season_cache.json
-└── README.md
+├── vision_output/              # CV generated images
+├── README.md
+└── requirements.txt
 ```
 
 ## 🔄 Data Flow
@@ -204,7 +206,8 @@ P2  NOR  Lando Norris       1:31.456    +0.222s
 
 ## 📈 Future Enhancements
 
-- [ ] Neural network implementation
+- [x] Neural network implementation
+- [x] Computer Vision track analysis
 - [ ] Real-time telemetry integration
 - [ ] Strategy simulation engine
 - [ ] Driver psychological factors

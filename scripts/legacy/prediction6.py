@@ -8,7 +8,7 @@ from sklearn.metrics import mean_absolute_error
 import matplotlib.pyplot as plt
 from sklearn.impute import SimpleImputer
 
-fastf1.Cache.enable_cache("f1_cache")
+fastf1.Cache.enable_cache("../../data/cache/f1_cache")
 
 # load the 2024 miami session data
 session_2024 = fastf1.get_session(2024, "Miami", "R")
