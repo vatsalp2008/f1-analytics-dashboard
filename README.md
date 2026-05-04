@@ -1,243 +1,169 @@
-# 🏎️ F1 Predictions 2025 - Advanced Machine Learning System
+# 🏎️ F1 Predictions 2025
 
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
-[![FastF1](https://img.shields.io/badge/FastF1-API-red)](https://github.com/theOehrly/Fast-F1)
-[![ML](https://img.shields.io/badge/ML-Gradient%20Boosting-green)](https://scikit-learn.org/)
+Machine-learning predictions for every round of the 2025 Formula 1 season.
 
-## 🚀 Project Overview
+[![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/)
+[![FastF1](https://img.shields.io/badge/FastF1-3.6-red)](https://github.com/theOehrly/Fast-F1)
+[![scikit-learn](https://img.shields.io/badge/sklearn-1.7-orange)](https://scikit-learn.org/)
+[![XGBoost](https://img.shields.io/badge/XGBoost-flagship-green)](https://xgboost.readthedocs.io/)
 
-An advanced Formula 1 race prediction system for the 2025 season that uses machine learning, real-time data fetching, and comprehensive feature engineering to predict race outcomes with high accuracy. The system progressively evolves from basic qualifying-based predictions to sophisticated models incorporating weather data, team performance tracking, pit strategies, and circuit-specific characteristics.
+## What it does
 
-### 🎯 Key Features
+One thin script per race (24 total). Each script auto-fetches every prior 2025 race via the FastF1 API, computes per-driver metrics, pulls the live race-day weather forecast, trains a model on the previous-year lap times for that circuit, and outputs a predicted finishing order with a podium and feature importances.
 
-- **Neural Network Modeling**: PyTorch-based Deep Learning for race result regression
-- **Computer Vision Analysis**: CNN-based analysis of track telemetry "fingerprints"
-- **Auto-fetching System**: Automatically retrieves actual 2025 race results from FastF1 API
-- **Smart Caching**: 24-hour refresh cycles to minimize API calls
-- **Progressive Model Complexity**: 8+ different prediction models with increasing sophistication
-- **Real-time Validation**: Validates predictions against actual race outcomes
-- **Circuit-Specific Models**: Specialized models for Monaco, Bahrain, Suzuka, etc.
-
-## 📊 Current Status (November 2025)
-
-- **Races Completed**: 20+ races of the 2025 season
-- **Models Developed**: 8 prediction scripts + 6 venue-specific models
-- **Accuracy**: Models achieving high accuracy when using actual race data
-- **Data Sources**: FastF1 API, Open-Meteo Weather API, actual 2025 results
-
-## 🏁 Prediction Models
-
-### Core Prediction Scripts
-
-| Script | Race/Purpose | Key Features | Complexity |
-|--------|-------------|--------------|------------|
-| `prediction1.py` | Australia | Season opener, pre-season testing data | Basic |
-| `prediction2.py` | China | Sprint weekend integration | Intermediate |
-| `prediction3.py` | Japan | Early season form metrics | Intermediate |
-| `prediction4.py` | Bahrain | Night race factors | Advanced |
-| `prediction5.py` | Saudi Arabia | Enhanced with auto-fetch | Advanced |
-| `prediction6.py` | Miami | Clean air race pace | Intermediate |
-| `prediction7.py` | Emilia Romagna | Weather integration | Advanced |
-| `prediction8.py` | Spain | Comprehensive features | Advanced |
-
-### Venue-Specific Models
-
-| Model | Special Characteristics | Unique Features |
-|-------|-------------------------|-----------------|
-| `bahrain.py` | **Most Advanced** - Auto-fetch functionality | Pit strategy analysis, form metrics, championship standings |
-| `monaco.py` | Street circuit specialist | 70% qualifying weight, max ±3-5 position changes |
-| `japanese.py` | Home race factors | Tsunoda boost, high-speed circuit adjustments |
-| `chinese.py` | Sprint weekend | 45% sprint weight, momentum tracking |
-| `australia.py` | Season opener | Pre-season testing integration |
-
-## 🔧 Technical Architecture
-
-### Data Pipeline
-```
-FastF1 API → Data Fetching → Caching → Processing → Feature Engineering → ML Model → Predictions
-     ↑                                       ↓
-     └──────── Validation ← Actual Results ←┘
-```
-
-### Feature Categories (15-20 features per model)
-
-1. **Race Performance**
-   - Season average positions
-   - Recent form (last 3 races)
-   - Momentum trends
-   - Championship points
-
-2. **Qualifying Data**
-   - Grid positions
-   - Sector times
-   - Weather-adjusted times
-
-3. **Team Metrics**
-   - Constructor standings
-   - Team performance scores
-   - Reliability factors
-
-4. **Environmental**
-   - Weather conditions (Open-Meteo API)
-   - Track temperature
-   - Rain probability
-
-5. **Circuit-Specific**
-   - Track characteristics
-   - Overtaking difficulty
-   - Historical performance
-
-## 📈 Model Evolution
-
-### Phase 1: Basic Models (prediction1-3)
-- Simple qualifying-based predictions
-- Historical data weighting
-- Basic feature engineering
-
-### Phase 2: Intermediate Models (prediction4-6)
-- Weather data integration
-- Team performance tracking
-- Sprint race incorporation
-
-### Phase 3: Advanced Models (prediction7-8, venue-specific)
-- Auto-fetching capabilities
-- Comprehensive feature sets
-- Real-time validation
-- Pit strategy analysis
-
-## 🛠️ Installation & Setup
-
-### Prerequisites
 ```bash
-pip install fastf1 pandas numpy scikit-learn matplotlib requests
+python3 races/04_bahrain.py
 ```
 
-### FastF1 Cache Setup
-```python
-import fastf1
-fastf1.Cache.enable_cache("f1_cache")
 ```
+🏁 2025 BAHRAIN GRAND PRIX 🏁
+======================================================================
+Round 4 of 24
+======================================================================
 
-### API Keys Required
-- OpenWeatherMap API (for weather data)
-- Optional: Open-Meteo API (for historical weather)
+📡 Loading 2025 season data...
+🔄 Fetching races 1..3
+  ✅ R1: Australian
+  ✅ R2: Chinese  🏃 Sprint included
+  ✅ R3: Japanese
 
-## 🚦 Usage
+🌤️ Fetching weather forecast...
+  Temperature: 30.4°C  |  Rain: 0%
 
-### Basic Race Prediction
-```bash
-python prediction5.py  # For Saudi Arabia GP
-```
-
-### Advanced Venue-Specific Prediction
-```bash
-python bahrain.py  # Auto-fetches latest data and predicts
-```
-
-### Expected Output
-```
-🏎️ 2025 BAHRAIN GRAND PRIX - PREDICTION WITH AUTO-FETCH 🏎️
-========================================================
-Current Date: November 4, 2025
-Automatically fetching all completed 2025 races...
-========================================================
-
-📊 Fetching Race 1: Australia...
-   ✅ Australia: Winner - NOR
-📊 Fetching Race 2: China...
-   ✅ China: Winner - PIA
-
-🏁 PREDICTED RACE ORDER:
-P1  VER  Max Verstappen      1:31.234    Leader
-P2  NOR  Lando Norris       1:31.456    +0.222s
+📋 PREDICTED RACE ORDER:
+P1   VER      Max Verstappen         P7    ↑6   18.9
+P2   LEC      Charles Leclerc        P3    ↑1   12.0
+P3   HAM      Lewis Hamilton         P9    ↑6    9.8
 ...
+
+🏆 PREDICTED PODIUM:
+  🥇 VER   Max Verstappen
+  🥈 LEC   Charles Leclerc
+  🥉 HAM   Lewis Hamilton
+
+📊 Model MAE: 1.040s
 ```
 
-## 📊 Key Insights & Learnings
-
-### Optimal Data Weighting
-- Sprint race results: 45%
-- Previous race results: 25%
-- Qualifying: 30%
-
-### Critical Discoveries
-1. **DNF Handling**: Treat DNF drivers as P15-20 based on retirement order
-2. **Data Prioritization**: 2025 actual > 2025 predicted > 2024 historical
-3. **Circuit Types**: Street circuits require different weighting (Monaco: 70% qualifying)
-
-## 🎯 Model Performance
-
-| Circuit | MAE (seconds) | Key Predictive Factor |
-|---------|--------------|----------------------|
-| Bahrain | 2.8 | Tire degradation |
-| Monaco | 1.9 | Qualifying position |
-| Suzuka | 3.1 | Recent form |
-| Shanghai | 2.9 | Sprint performance |
-
-## 📁 Project Structure
+## Project structure
 
 ```
 f1-predictions-vatsal/
-├── models/
-│   ├── neural_prediction.py    # PyTorch implementation
-│   ├── vision_analysis.py      # TensorFlow + CV
-│   └── 21brazilXGBoost.py      # Advanced XGBoost
-├── scripts/
-│   ├── venue_specific/         # Bahrain, Monaco, etc.
-│   └── legacy/                 # Older prediction scripts
-├── data/
-│   ├── cache/                  # FastF1 API cache
-│   ├── f1_2025_brazil_cache.json
-│   └── f1_2025_season_cache.json
-├── vision_output/              # CV generated images
-├── README.md
-└── requirements.txt
+├── races/                  # 24 thin race scripts (round numbers 01–24)
+│   ├── 01_australia.py
+│   ├── 02_china.py
+│   ├── ...
+│   └── 24_abu_dhabi.py
+├── utils/                  # shared logic
+│   ├── predictor.py        # the pipeline (~280 lines)
+│   ├── weather.py          # Open-Meteo forecast helper
+│   └── season_metrics.py   # TRACK_SPECIALISTS + Consistency/Reliability
+├── models/                 # experimental ML demos (not part of main pipeline)
+│   ├── neural_prediction.py    # PyTorch FC network
+│   └── vision_analysis.py      # TF/Keras CNN over track-map images
+├── data/                   # caches (FastF1 SQLite + season JSON)
+└── vision_output/          # CNN track-map outputs
 ```
 
-## 🔄 Data Flow
+## Each race file is ~15 lines
 
-1. **Fetch**: Retrieve actual 2025 results via FastF1
-2. **Cache**: Store with 24-hour expiry
-3. **Process**: Calculate metrics (form, momentum, consistency)
-4. **Engineer**: Create 15-20 features
-5. **Train**: Gradient Boosting Regressor
-6. **Predict**: Generate race outcomes
-7. **Validate**: Compare with actual results
+The whole prediction pipeline lives in `utils/predictor.py`. A race script just sets a `RaceConfig` and hands it off:
 
-## 📈 Future Enhancements
+```python
+# races/08_monaco.py
+from utils.predictor import RaceConfig, run_prediction
 
-- [x] Neural network implementation
-- [x] Computer Vision track analysis
-- [ ] Real-time telemetry integration
-- [ ] Strategy simulation engine
-- [ ] Driver psychological factors
-- [ ] Safety car probability modeling
-- [ ] Tire compound strategy optimization
+CONFIG = RaceConfig(
+    round_number=8,
+    race_name="Monaco Grand Prix",
+    fastf1_name="Monaco",
+    circuit_key="Monaco",
+    lat=43.7347,
+    lon=7.4206,
+    quali_weight=0.80,            # Monaco is qualifying-dominant
+    form_weight=0.20,
+    max_positions_gained=3,       # near-impossible to overtake
+    max_positions_lost=5,
+)
 
-## 🏆 Key Achievements
+if __name__ == "__main__":
+    run_prediction(CONFIG)
+```
 
-- ✅ Successfully predicted Piastri's China victory
-- ✅ Accurately modeled McLaren's championship trajectory
-- ✅ Integrated actual DSQ/penalty handling
-- ✅ Developed circuit-specific weighting systems
+To adjust how a race is predicted, change the constants in its config — no need to touch the shared pipeline.
 
-## 👤 Author
+## What the pipeline does
 
-**Developer**: Vatsal  
-**Project**: F1 race prediction system using machine learning and real-time data analysis
+For each race the predictor:
 
-## 📝 License
+1. **Fetches every completed 2025 race** before this round via FastF1 (with a 24h JSON cache for re-runs).
+2. **Computes per-driver metrics**: season average, exp-weighted recent form (last 5 races), sprint average, momentum (linear trend over last 6), consistency (1/(1+std) of finished positions), reliability (% races finished). DNFs/DSQs are filtered out of consistency.
+3. **Pulls live weather** for race-day Sunday from Open-Meteo (free, no API key, ~16-day forecast).
+4. **Fetches actual qualifying** for this round (Q3→Q2→Q1 fallback per driver).
+5. **Optionally fetches sprint** if `has_sprint=True`.
+6. **Loads previous-year lap times** for this circuit as the regression target.
+7. **Trains** a `GradientBoostingRegressor` (or `XGBRegressor` if `model_type="xgboost"`) on the engineered feature matrix.
+8. **Applies adjustments** — qualifying-position weight, recent-form weight, momentum bonus/penalty.
+9. **Clamps position changes** to circuit-realistic bounds (Monaco ±3/5, Monza ±10/12, etc.).
+10. **Outputs** ranked predictions, podium, MAE, top-5 features.
 
-This project is licensed under the MIT License.
+### Features used (16)
 
-## 🙏 Acknowledgments
+`QualifyingTime`, `QualifyingPosition`, `SeasonAverage`, `RecentForm`, `SprintAverage`, `SprintPosition`, `Momentum`, `Consistency`, `Reliability`, `ChampionshipPoints`, `CircuitSpecialist`, `StartingPositionAdvantage`, `RainProbability`, `Temperature`, `Humidity`, `WindSpeed`.
 
-- FastF1 API developers
-- F1 community for data insights
-- Open-Meteo for weather data
+## Per-race tuning
 
----
+Built-in weight overrides reflect each circuit's character:
 
-**🏎️ Predicting F1 with data science - one race at a time! 🚀**
+| Round | Race | Quali / Form weight | Max gained / lost |
+|-------|------|---------------------|-------------------|
+| 08 | Monaco | 0.80 / 0.20 | 3 / 5 |
+| 18 | Singapore | 0.70 / 0.30 | 4 / 6 |
+| 14 | Hungary | 0.65 / 0.35 | 5 / 8 |
+| 15 | Netherlands | 0.60 / 0.40 | 5 / 8 |
+| 17 | Azerbaijan | 0.55 / 0.45 | 7 / 10 |
+| 04 | Bahrain | 0.55 / 0.45 | 6 / 10 |
+| 16 | Italy (Monza) | 0.45 / 0.55 | 10 / 12 |
+| Others | — | 0.50 / 0.50 | 8 / 12 |
 
-*Note: This is a predictive model for educational purposes. Actual race outcomes depend on numerous unpredictable factors.*
+Sprint weekends: rounds **2, 6, 13, 19, 21, 23**.
+XGBoost flagship: round **21 (Brazil)** uses `model_type="xgboost"`.
+
+## Setup
+
+```bash
+python3 -m venv f1env
+source f1env/bin/activate
+pip install -r requirements.txt
+```
+
+Required: `fastf1`, `scikit-learn`, `pandas`, `numpy`, `requests`, `matplotlib`. Optional: `xgboost` (only round 21 needs it; everything else works without).
+
+No API keys needed — Open-Meteo's free forecast endpoint is used for weather.
+
+## Running
+
+Run a single race:
+```bash
+python3 races/04_bahrain.py
+```
+
+The first run will fetch every prior race from FastF1 (slow — late-season scripts may take a few minutes on first run as they pull 20+ races' worth of session data). Subsequent runs hit the FastF1 SQLite cache and the 24-hour JSON season cache, making them fast.
+
+## Experimental models
+
+`models/` holds two standalone ML demos that aren't part of the main pipeline:
+
+- **`neural_prediction.py`** — PyTorch fully-connected network (64→32→1) trained on cached FastF1 data. MSE + Adam, 200 epochs.
+- **`vision_analysis.py`** — TensorFlow CNN over GPS-derived track-map PNGs, classifies circuit type (street / high-downforce / power).
+
+Both are exploratory — the production predictor is in `utils/predictor.py`.
+
+## License
+
+MIT.
+
+## Acknowledgments
+
+- [FastF1](https://github.com/theOehrly/Fast-F1) — F1 telemetry / results API
+- [Open-Meteo](https://open-meteo.com/) — free weather forecasts
+- [scikit-learn](https://scikit-learn.org/) and [XGBoost](https://xgboost.readthedocs.io/)
