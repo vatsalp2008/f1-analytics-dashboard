@@ -1,7 +1,5 @@
 """Shared race-prediction pipeline. Each race file builds a RaceConfig and calls run_prediction."""
 from dataclasses import dataclass
-from datetime import datetime
-import json
 from pathlib import Path
 from typing import Optional
 
@@ -19,7 +17,6 @@ from .season_metrics import TRACK_SPECIALISTS, calculate_consistency_and_reliabi
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 CACHE_DIR = PROJECT_ROOT / "data" / "cache" / "f1_cache"
-SEASON_CACHE = PROJECT_ROOT / "data" / "f1_2025_season_cache.json"
 
 POINTS = {1: 25, 2: 18, 3: 15, 4: 12, 5: 10, 6: 8, 7: 6, 8: 4, 9: 2, 10: 1}
 SPRINT_POINTS = {1: 8, 2: 7, 3: 6, 4: 5, 5: 4, 6: 3, 7: 2, 8: 1}
@@ -56,20 +53,11 @@ def _enable_fastf1_cache():
 def fetch_completed_races(up_to_round: int) -> dict:
     """Fetch 2025 races from round 1 to (up_to_round - 1).
 
-    Uses 24h JSON cache. Refetches if cache is stale OR doesn't cover enough rounds.
+    Always fetches fresh from FastF1 — relies on FastF1's own SQLite cache for speed.
     """
-    if SEASON_CACHE.exists():
-        with SEASON_CACHE.open() as f:
-            cache = json.load(f)
-        is_fresh = (datetime.now().timestamp() - SEASON_CACHE.stat().st_mtime) < 86400
-        is_complete = len(cache.get("season_results", {})) >= (up_to_round - 1)
-        if is_fresh and is_complete:
-            print("📂 Using cached season data (<24h old, complete)")
-            return cache
-
     if up_to_round <= 1:
         # Round 1: nothing to fetch
-        return {"season_results": {}, "sprint_results": {}, "driver_standings": {}, "fetch_time": datetime.now().isoformat()}
+        return {"season_results": {}, "sprint_results": {}, "driver_standings": {}}
 
     print(f"🔄 Fetching races 1..{up_to_round - 1}")
     season_results = {}
@@ -114,17 +102,12 @@ def fetch_completed_races(up_to_round: int) -> dict:
         for d, p in results.items():
             standings[d] = standings.get(d, 0) + SPRINT_POINTS.get(p, 0)
 
-    cache = {
+    print(f"✅ Loaded {len(season_results)} races + {len(sprint_results)} sprints")
+    return {
         "season_results": season_results,
         "sprint_results": sprint_results,
         "driver_standings": standings,
-        "fetch_time": datetime.now().isoformat(),
     }
-    SEASON_CACHE.parent.mkdir(parents=True, exist_ok=True)
-    with SEASON_CACHE.open("w") as f:
-        json.dump(cache, f, indent=2)
-    print(f"✅ Cached {len(season_results)} races + {len(sprint_results)} sprints")
-    return cache
 
 
 def fetch_qualifying(config: RaceConfig) -> Optional[pd.DataFrame]:

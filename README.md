@@ -1,134 +1,65 @@
-# 🏎️ F1 Predictions 2025
+# 🏎️ F1 Analytics Dashboard
 
-Machine-learning predictions for every round of the 2025 Formula 1 season.
+Machine-learning race predictions **+** interactive telemetry replay for the 2025 Formula 1 season, in a single project.
 
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-backend-009688)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/React-19-61dafb)](https://react.dev/)
 [![FastF1](https://img.shields.io/badge/FastF1-3.6-red)](https://github.com/theOehrly/Fast-F1)
 [![scikit-learn](https://img.shields.io/badge/sklearn-1.7-orange)](https://scikit-learn.org/)
-[![XGBoost](https://img.shields.io/badge/XGBoost-flagship-green)](https://xgboost.readthedocs.io/)
 
 ## What it does
 
-One thin script per race (24 total). Each script auto-fetches every prior 2025 race via the FastF1 API, computes per-driver metrics, pulls the live race-day weather forecast, trains a model on the previous-year lap times for that circuit, and outputs a predicted finishing order with a podium and feature importances.
+Three things, in one repo:
 
-```bash
-python3 races/04_bahrain.py
-```
+1. **Race predictions** — 24 CLI scripts (one per 2025 round) that fetch real data via FastF1, pull a live Open-Meteo forecast, train a GBM/XGBoost model on the previous-year lap times, and output a ranked finishing order.
+2. **Web dashboard** — FastAPI backend + React/Vite frontend that visualizes live race telemetry and produces interactive race replays.
+3. **Desktop replay GUI** — legacy Arcade-based standalone app for the same race-replay visualization, without a browser.
 
-```
-🏁 2025 BAHRAIN GRAND PRIX 🏁
-======================================================================
-Round 4 of 24
-======================================================================
-
-📡 Loading 2025 season data...
-🔄 Fetching races 1..3
-  ✅ R1: Australian
-  ✅ R2: Chinese  🏃 Sprint included
-  ✅ R3: Japanese
-
-🌤️ Fetching weather forecast...
-  Temperature: 30.4°C  |  Rain: 0%
-
-📋 PREDICTED RACE ORDER:
-P1   VER      Max Verstappen         P7    ↑6   18.9
-P2   LEC      Charles Leclerc        P3    ↑1   12.0
-P3   HAM      Lewis Hamilton         P9    ↑6    9.8
-...
-
-🏆 PREDICTED PODIUM:
-  🥇 VER   Max Verstappen
-  🥈 LEC   Charles Leclerc
-  🥉 HAM   Lewis Hamilton
-
-📊 Model MAE: 1.040s
-```
+Both halves share one [data/](data/) directory and one [requirements.txt](requirements.txt). The dashboard and the predictions modules **do not yet talk to each other** — that's the next integration step (see [plan.md](plan.md)).
 
 ## Project structure
 
 ```
-f1-predictions-vatsal/
-├── races/                  # 24 thin race scripts (round numbers 01–24)
-│   ├── 01_australia.py
-│   ├── 02_china.py
-│   ├── ...
-│   └── 24_abu_dhabi.py
-├── utils/                  # shared logic
-│   ├── predictor.py        # the pipeline (~280 lines)
-│   ├── weather.py          # Open-Meteo forecast helper
-│   └── season_metrics.py   # TRACK_SPECIALISTS + Consistency/Reliability
-├── models/                 # experimental ML demos (not part of main pipeline)
-│   ├── neural_prediction.py    # PyTorch FC network
-│   └── vision_analysis.py      # TF/Keras CNN over track-map images
-├── data/                   # caches (FastF1 SQLite + season JSON)
-└── vision_output/          # CNN track-map outputs
+f1-analytics-dashboard/
+├── README.md, plan.md, requirements.txt, package.json
+│
+├── races/                   24 prediction CLI scripts (01_australia.py … 24_abu_dhabi.py)
+├── utils/                   shared prediction pipeline
+│   ├── predictor.py         the pipeline (~280 lines)
+│   ├── weather.py           Open-Meteo forecast helper
+│   └── season_metrics.py    TRACK_SPECIALISTS + Consistency/Reliability
+├── models/                  experimental ML demos (PyTorch FC net, TF CNN)
+│
+├── backend/                 FastAPI service for the web dashboard
+│   ├── main.py              API entry point + CORS + routes
+│   └── f1_service.py        FastF1 telemetry processing
+├── frontend/                React + Vite SPA
+│   ├── src/                 React components (RaceMenu, ReplayEngine, …)
+│   └── package.json
+├── desktop/                 legacy Arcade GUI replay
+│   ├── main.py              desktop entry point
+│   └── src/                 desktop source
+│
+├── data/                    unified data root
+│   ├── cache/
+│   │   ├── f1_cache/        predictions' FastF1 cache
+│   │   └── fastf1-cache/    replay's FastF1 cache  (to be merged)
+│   ├── computed_data/       pre-computed telemetry pickles (~300MB each)
+│   ├── images/              UI assets
+│   └── resources/           preview images
+│
+├── docs/                    non-code documentation
+│   ├── dashboard.md         full race-replay README (preserved verbatim)
+│   ├── roadmap.md           planned replay features
+│   └── contributors.md
+│
+└── vision_output/           CV demo output (track-map PNGs)
 ```
-
-## Each race file is ~15 lines
-
-The whole prediction pipeline lives in `utils/predictor.py`. A race script just sets a `RaceConfig` and hands it off:
-
-```python
-# races/08_monaco.py
-from utils.predictor import RaceConfig, run_prediction
-
-CONFIG = RaceConfig(
-    round_number=8,
-    race_name="Monaco Grand Prix",
-    fastf1_name="Monaco",
-    circuit_key="Monaco",
-    lat=43.7347,
-    lon=7.4206,
-    quali_weight=0.80,            # Monaco is qualifying-dominant
-    form_weight=0.20,
-    max_positions_gained=3,       # near-impossible to overtake
-    max_positions_lost=5,
-)
-
-if __name__ == "__main__":
-    run_prediction(CONFIG)
-```
-
-To adjust how a race is predicted, change the constants in its config — no need to touch the shared pipeline.
-
-## What the pipeline does
-
-For each race the predictor:
-
-1. **Fetches every completed 2025 race** before this round via FastF1 (with a 24h JSON cache for re-runs).
-2. **Computes per-driver metrics**: season average, exp-weighted recent form (last 5 races), sprint average, momentum (linear trend over last 6), consistency (1/(1+std) of finished positions), reliability (% races finished). DNFs/DSQs are filtered out of consistency.
-3. **Pulls live weather** for race-day Sunday from Open-Meteo (free, no API key, ~16-day forecast).
-4. **Fetches actual qualifying** for this round (Q3→Q2→Q1 fallback per driver).
-5. **Optionally fetches sprint** if `has_sprint=True`.
-6. **Loads previous-year lap times** for this circuit as the regression target.
-7. **Trains** a `GradientBoostingRegressor` (or `XGBRegressor` if `model_type="xgboost"`) on the engineered feature matrix.
-8. **Applies adjustments** — qualifying-position weight, recent-form weight, momentum bonus/penalty.
-9. **Clamps position changes** to circuit-realistic bounds (Monaco ±3/5, Monza ±10/12, etc.).
-10. **Outputs** ranked predictions, podium, MAE, top-5 features.
-
-### Features used (16)
-
-`QualifyingTime`, `QualifyingPosition`, `SeasonAverage`, `RecentForm`, `SprintAverage`, `SprintPosition`, `Momentum`, `Consistency`, `Reliability`, `ChampionshipPoints`, `CircuitSpecialist`, `StartingPositionAdvantage`, `RainProbability`, `Temperature`, `Humidity`, `WindSpeed`.
-
-## Per-race tuning
-
-Built-in weight overrides reflect each circuit's character:
-
-| Round | Race | Quali / Form weight | Max gained / lost |
-|-------|------|---------------------|-------------------|
-| 08 | Monaco | 0.80 / 0.20 | 3 / 5 |
-| 18 | Singapore | 0.70 / 0.30 | 4 / 6 |
-| 14 | Hungary | 0.65 / 0.35 | 5 / 8 |
-| 15 | Netherlands | 0.60 / 0.40 | 5 / 8 |
-| 17 | Azerbaijan | 0.55 / 0.45 | 7 / 10 |
-| 04 | Bahrain | 0.55 / 0.45 | 6 / 10 |
-| 16 | Italy (Monza) | 0.45 / 0.55 | 10 / 12 |
-| Others | — | 0.50 / 0.50 | 8 / 12 |
-
-Sprint weekends: rounds **2, 6, 13, 19, 21, 23**.
-XGBoost flagship: round **21 (Brazil)** uses `model_type="xgboost"`.
 
 ## Setup
+
+Python:
 
 ```bash
 python3 -m venv f1env
@@ -136,27 +67,101 @@ source f1env/bin/activate
 pip install -r requirements.txt
 ```
 
-Required: `fastf1`, `scikit-learn`, `pandas`, `numpy`, `requests`, `matplotlib`. Optional: `xgboost` (only round 21 needs it; everything else works without).
+Node (for the web dashboard only):
 
-No API keys needed — Open-Meteo's free forecast endpoint is used for weather.
+```bash
+npm install                    # root-level orchestrator deps
+cd frontend && npm install     # React app deps
+```
+
+No API keys needed. Open-Meteo's free forecast endpoint covers weather; FastF1 covers everything else.
 
 ## Running
 
-Run a single race:
+### Predictions (CLI, one script per race)
+
 ```bash
-python3 races/04_bahrain.py
+python3 races/04_bahrain.py        # any of the 24 race files
 ```
 
-The first run will fetch every prior race from FastF1 (slow — late-season scripts may take a few minutes on first run as they pull 20+ races' worth of session data). Subsequent runs hit the FastF1 SQLite cache and the 24-hour JSON season cache, making them fast.
+The first run for any round will pull all prior 2025 races from FastF1 (slow — late-season scripts fetch 20+ races). Subsequent runs hit FastF1's local SQLite cache and finish in seconds.
 
-## Experimental models
+### Web dashboard (FastAPI + React)
 
-`models/` holds two standalone ML demos that aren't part of the main pipeline:
+```bash
+npm run dev                        # starts FastAPI on :8000 and Vite dev server on :5173
+```
 
-- **`neural_prediction.py`** — PyTorch fully-connected network (64→32→1) trained on cached FastF1 data. MSE + Adam, 200 epochs.
-- **`vision_analysis.py`** — TensorFlow CNN over GPS-derived track-map PNGs, classifies circuit type (street / high-downforce / power).
+Open `http://localhost:5173` for the dashboard.
 
-Both are exploratory — the production predictor is in `utils/predictor.py`.
+### Desktop replay (Arcade GUI)
+
+```bash
+python3 desktop/main.py            # opens the GUI menu
+python3 desktop/main.py --year 2025 --round 12          # jump straight into a race
+python3 desktop/main.py --year 2025 --round 12 --qualifying
+```
+
+Full desktop CLI flag reference lives in [docs/dashboard.md](docs/dashboard.md).
+
+## Pipeline overview (predictions)
+
+For each race the predictor:
+
+1. **Fetches every completed 2025 race** before this round via FastF1.
+2. **Computes per-driver metrics**: season average, exp-weighted recent form (last 5), sprint average, momentum (linear trend over last 6), consistency (1/(1+std) of finished positions), reliability (% finished). DNFs filtered out of consistency.
+3. **Pulls live weather** for race-day Sunday (Open-Meteo, no API key).
+4. **Fetches qualifying** for this round (Q3→Q2→Q1 fallback).
+5. **Optionally fetches sprint** if the round has one.
+6. **Loads previous-year lap times** as the regression target.
+7. **Trains** a `GradientBoostingRegressor` (or `XGBRegressor` if `model_type="xgboost"`).
+8. **Applies adjustments** — qualifying weight, recent-form weight, momentum bonus/penalty.
+9. **Clamps position changes** to circuit-realistic bounds.
+10. **Outputs** ranked predictions, podium, MAE, top-5 features.
+
+### Per-race tuning
+
+Each race script is ~15 lines and exposes its tuning via `RaceConfig`:
+
+```python
+# races/08_monaco.py
+CONFIG = RaceConfig(
+    round_number=8,
+    race_name="Monaco Grand Prix",
+    fastf1_name="Monaco",
+    circuit_key="Monaco",
+    lat=43.7347,
+    lon=7.4206,
+    quali_weight=0.80,            # Monaco: qualifying-dominant
+    form_weight=0.20,
+    max_positions_gained=3,
+    max_positions_lost=5,
+)
+```
+
+Tuning highlights:
+
+| Round | Race | Quali / Form | Max gained / lost |
+|-------|------|--------------|-------------------|
+| 08 | Monaco | 0.80 / 0.20 | 3 / 5 |
+| 18 | Singapore | 0.70 / 0.30 | 4 / 6 |
+| 14 | Hungary | 0.65 / 0.35 | 5 / 8 |
+| 16 | Italy (Monza) | 0.45 / 0.55 | 10 / 12 |
+| Others | — | 0.50 / 0.50 | 8 / 12 |
+
+Sprint weekends: rounds **2, 6, 13, 19, 21, 23**.
+XGBoost flagship: round **21** (Brazil) — every other round uses GBM by default.
+
+## Status
+
+See [plan.md](plan.md) for the live project status — what's done, what's still pending, and what the next step is.
+
+Current high-level state:
+
+- ✅ Predictions pipeline works end-to-end for all 24 rounds
+- ✅ Race-replay dashboard merged into the same repo, sharing `data/` and `requirements.txt`
+- 🟡 The two halves don't talk to each other yet — no predictions exposed via the FastAPI backend, no Predictions tab in the React frontend
+- ❌ No accuracy validation yet — MAE numbers from prediction runs are not directly comparable to actual race results
 
 ## License
 
@@ -167,3 +172,4 @@ MIT.
 - [FastF1](https://github.com/theOehrly/Fast-F1) — F1 telemetry / results API
 - [Open-Meteo](https://open-meteo.com/) — free weather forecasts
 - [scikit-learn](https://scikit-learn.org/) and [XGBoost](https://xgboost.readthedocs.io/)
+- [F1 Race Replay](https://github.com/IAmTomShaw/f1-race-replay) by Tom Shaw — the upstream race-replay project absorbed into this repo

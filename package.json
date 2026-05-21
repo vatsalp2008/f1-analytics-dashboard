@@ -1,0 +1,14 @@
+{
+    "name": "f1-analytics-dashboard",
+    "version": "1.0.0",
+    "description": "F1 race predictions + telemetry replay dashboard for the 2025 season",
+    "scripts": {
+        "dev": "concurrently \"python3 -m uvicorn backend.main:app --host 0.0.0.0 --port 8000\" \"npm run dev --prefix frontend\"",
+        "install-all": "pip install -r requirements.txt && npm install && npm install --prefix frontend"
+    },
+    "dependencies": {
+        "axios": "^1.13.6",
+        "concurrently": "^8.2.2",
+        "lucide-react": "^1.0.1"
+    }
+}

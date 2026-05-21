@@ -31,3 +31,11 @@ tzdata==2025.2
 url-normalize==2.2.1
 urllib3==2.5.0
 websockets==13.1
+
+# === Web dashboard (FastAPI backend) ===
+fastapi
+uvicorn[standard]
+
+# === Desktop replay GUI (legacy, optional) ===
+arcade
+pyglet

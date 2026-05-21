@@ -18,7 +18,7 @@ vision_output/
 f1_cache/
 .DS_Store
 f1env/
-*.json
+data/cache/**/*.json
 *.cache
 
 # IDE
@@ -42,3 +42,22 @@ Thumbs.db
 config.py
 *apikey*
 *api_key*
+
+# === Web dashboard ===
+node_modules/
+dist/
+build/
+.vite/
+*.local
+
+# === Desktop replay GUI ===
+output_animation.mp4
+still_frame.png
+.fastf1-cache/
+data/computed_data/
+
+# === Type checkers ===
+.mypy_cache/
+
+# === Local Claude Code state ===
+.claude/
