@@ -1,11 +1,11 @@
 """Shared season-level metrics: track-specialist factors and DNF-aware consistency/reliability.
 
 `TRACK_SPECIALISTS` is a per-circuit, per-driver multiplier on lap time. Lower = faster
-at this circuit. Hand-curated for now — see CHANGES.md #3 for plan to derive from FastF1
-historical results in a future pass.
-
-`calculate_consistency_and_reliability` returns two driver→score dicts from a season
-results mapping (where DNFs are encoded as position 19 and DSQs as 20 by the fetcher).
+at this circuit. Hand-curated; covers 6 circuits (Albert Park, Shanghai, Suzuka, Bahrain,
+Monaco, Interlagos). A FastF1-derived rank-based replacement was prototyped in
+`utils/track_specialists.py` but **regressed the backtest by 0.014 ρ**, so the hand-coded
+values are still authoritative. See backtest_results/2025_fastf1_specialists.json for the
+comparison run.
 """
 import numpy as np
 
@@ -14,8 +14,6 @@ DNF_POSITIONS = {19, 20}
 
 # Per-driver multiplier on lap time, keyed by circuit then driver code.
 # Lower = faster at this circuit. Default 1.0 = no track-specific signal.
-# Audit fix (CHANGES.md #3): Shanghai ANT was 1.00 — bumped to 1.02 to match other
-# Shanghai rookies (BEA/DOO/HAD/BOR all 1.02), since Antonelli was a rookie at Shanghai too.
 TRACK_SPECIALISTS = {
     "Albert Park": {
         "VER": 0.98, "HAM": 0.97, "LEC": 0.99, "NOR": 0.99,

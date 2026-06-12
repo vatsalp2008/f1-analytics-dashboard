@@ -1,0 +1,257 @@
+{
+  "year": 2025,
+  "races": [
+    {
+      "round": 1,
+      "race": "Australian Grand Prix",
+      "model": "gbm",
+      "spearman_rho": 0.437593984962406,
+      "top3_hit_rate": 1.0,
+      "weighted_position_err": 19.718568681920075,
+      "mae_position": 4.9,
+      "n_drivers": 20.0
+    },
+    {
+      "round": 2,
+      "race": "Chinese Grand Prix",
+      "model": "gbm",
+      "spearman_rho": 0.18796992481203004,
+      "top3_hit_rate": 1.0,
+      "weighted_position_err": 22.413920530793597,
+      "mae_position": 6.4,
+      "n_drivers": 20.0
+    },
+    {
+      "round": 3,
+      "race": "Japanese Grand Prix",
+      "model": "gbm",
+      "spearman_rho": 0.8661654135338346,
+      "top3_hit_rate": 3.0,
+      "weighted_position_err": 5.273383397648104,
+      "mae_position": 2.1,
+      "n_drivers": 20.0
+    },
+    {
+      "round": 4,
+      "race": "Bahrain Grand Prix",
+      "model": "gbm",
+      "spearman_rho": 0.5774436090225563,
+      "top3_hit_rate": 1.0,
+      "weighted_position_err": 15.100824072728097,
+      "mae_position": 3.8,
+      "n_drivers": 20.0
+    },
+    {
+      "round": 5,
+      "race": "Saudi Arabian Grand Prix",
+      "model": "gbm",
+      "spearman_rho": 0.7097744360902255,
+      "top3_hit_rate": 3.0,
+      "weighted_position_err": 9.591350986474824,
+      "mae_position": 3.5,
+      "n_drivers": 20.0
+    },
+    {
+      "round": 6,
+      "race": "Miami Grand Prix",
+      "model": "gbm",
+      "spearman_rho": 0.8075187969924811,
+      "top3_hit_rate": 1.0,
+      "weighted_position_err": 12.461087742666692,
+      "mae_position": 3.0,
+      "n_drivers": 20.0
+    },
+    {
+      "round": 7,
+      "race": "Emilia Romagna Grand Prix",
+      "model": "gbm",
+      "spearman_rho": 0.7263157894736841,
+      "top3_hit_rate": 3.0,
+      "weighted_position_err": 6.146294610961794,
+      "mae_position": 3.0,
+      "n_drivers": 20.0
+    },
+    {
+      "round": 8,
+      "race": "Monaco Grand Prix",
+      "model": "gbm",
+      "spearman_rho": 0.7112781954887217,
+      "top3_hit_rate": 2.0,
+      "weighted_position_err": 8.670210766185999,
+      "mae_position": 3.5,
+      "n_drivers": 20.0
+    },
+    {
+      "round": 9,
+      "race": "Spanish Grand Prix",
+      "model": "gbm",
+      "spearman_rho": 0.6157894736842106,
+      "top3_hit_rate": 1.0,
+      "weighted_position_err": 15.889003682076439,
+      "mae_position": 4.105263157894737,
+      "n_drivers": 19.0
+    },
+    {
+      "round": 10,
+      "race": "Canadian Grand Prix",
+      "model": "gbm",
+      "spearman_rho": 0.22255639097744356,
+      "top3_hit_rate": 1.0,
+      "weighted_position_err": 15.63541001482178,
+      "mae_position": 5.3,
+      "n_drivers": 20.0
+    },
+    {
+      "round": 11,
+      "race": "Austrian Grand Prix",
+      "model": "gbm",
+      "spearman_rho": 0.5488721804511278,
+      "top3_hit_rate": 2.0,
+      "weighted_position_err": 11.080191209719073,
+      "mae_position": 4.4,
+      "n_drivers": 20.0
+    },
+    {
+      "round": 12,
+      "race": "British Grand Prix",
+      "model": "gbm",
+      "spearman_rho": 0.6375939849624059,
+      "top3_hit_rate": 1.0,
+      "weighted_position_err": 13.304809195792167,
+      "mae_position": 4.1,
+      "n_drivers": 20.0
+    },
+    {
+      "round": 13,
+      "race": "Belgian Grand Prix",
+      "model": "gbm",
+      "spearman_rho": 0.7187969924812029,
+      "top3_hit_rate": 2.0,
+      "weighted_position_err": 6.328758638162662,
+      "mae_position": 3.2,
+      "n_drivers": 20.0
+    },
+    {
+      "round": 14,
+      "race": "Hungarian Grand Prix",
+      "model": "gbm",
+      "spearman_rho": 0.7533834586466165,
+      "top3_hit_rate": 3.0,
+      "weighted_position_err": 7.178825964197481,
+      "mae_position": 3.2,
+      "n_drivers": 20.0
+    },
+    {
+      "round": 15,
+      "race": "Dutch Grand Prix",
+      "model": "gbm",
+      "spearman_rho": 0.025563909774436087,
+      "top3_hit_rate": 2.0,
+      "weighted_position_err": 29.543037019739806,
+      "mae_position": 6.0,
+      "n_drivers": 20.0
+    },
+    {
+      "round": 16,
+      "race": "Italian Grand Prix",
+      "model": "gbm",
+      "spearman_rho": 0.706766917293233,
+      "top3_hit_rate": 3.0,
+      "weighted_position_err": 8.679897510470266,
+      "mae_position": 3.3,
+      "n_drivers": 20.0
+    },
+    {
+      "round": 17,
+      "race": "Azerbaijan Grand Prix",
+      "model": "gbm",
+      "spearman_rho": 0.5699248120300752,
+      "top3_hit_rate": 2.0,
+      "weighted_position_err": 9.871422987057663,
+      "mae_position": 3.4,
+      "n_drivers": 20.0
+    },
+    {
+      "round": 18,
+      "race": "Singapore Grand Prix",
+      "model": "gbm",
+      "spearman_rho": 0.7999999999999999,
+      "top3_hit_rate": 2.0,
+      "weighted_position_err": 7.048493255110903,
+      "mae_position": 2.8,
+      "n_drivers": 20.0
+    },
+    {
+      "round": 19,
+      "race": "United States Grand Prix",
+      "model": "gbm",
+      "spearman_rho": 0.5278195488721804,
+      "top3_hit_rate": 3.0,
+      "weighted_position_err": 9.310683451395525,
+      "mae_position": 3.9,
+      "n_drivers": 20.0
+    },
+    {
+      "round": 20,
+      "race": "Mexico City Grand Prix",
+      "model": "gbm",
+      "spearman_rho": 0.5624060150375939,
+      "top3_hit_rate": 2.0,
+      "weighted_position_err": 12.605952801928034,
+      "mae_position": 4.3,
+      "n_drivers": 20.0
+    },
+    {
+      "round": 21,
+      "race": "Brazilian Grand Prix",
+      "model": "xgboost",
+      "spearman_rho": 0.5037593984962406,
+      "top3_hit_rate": 2.0,
+      "weighted_position_err": 14.923671912023307,
+      "mae_position": 4.1,
+      "n_drivers": 20.0
+    },
+    {
+      "round": 22,
+      "race": "Las Vegas Grand Prix",
+      "model": "gbm",
+      "spearman_rho": 0.1894736842105263,
+      "top3_hit_rate": 2.0,
+      "weighted_position_err": 13.933728560740946,
+      "mae_position": 5.2,
+      "n_drivers": 20.0
+    },
+    {
+      "round": 23,
+      "race": "Qatar Grand Prix",
+      "model": "gbm",
+      "spearman_rho": 0.732330827067669,
+      "top3_hit_rate": 2.0,
+      "weighted_position_err": 7.274062470037703,
+      "mae_position": 3.3,
+      "n_drivers": 20.0
+    },
+    {
+      "round": 24,
+      "race": "Abu Dhabi Grand Prix",
+      "model": "gbm",
+      "spearman_rho": 0.7398496240601502,
+      "top3_hit_rate": 1.0,
+      "weighted_position_err": 12.225687805486565,
+      "mae_position": 3.3,
+      "n_drivers": 20.0
+    }
+  ],
+  "aggregate": {
+    "mean_spearman_rho": 0.5782894736842105,
+    "mean_top3_hit_rate": 1.9166666666666667,
+    "mean_weighted_position_err": 12.258719886172479,
+    "mean_mae_position": 3.9210526315789473,
+    "n_races": 24
+  },
+  "notes": [
+    "Weather override used: rain_probability=0, T=22\u00b0C, humidity=50%, wind=2m/s",
+    "DNF\u2192pos 19, DSQ\u2192pos 20 (mirrors predictor.py extractor)",
+    "Spearman \u03c1 on full grid; top-3 hit rate counts overlap between predicted P1-3 and actual P1-3"
+  ]
+}
