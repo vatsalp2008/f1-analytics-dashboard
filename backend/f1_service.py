@@ -1,4 +1,6 @@
 import os
+from pathlib import Path
+
 import fastf1
 import fastf1.plotting
 import numpy as np
@@ -11,10 +13,15 @@ from typing import Dict, List, Any
 FPS = 25
 DT = 1 / FPS
 
+# Shared FastF1 cache — same path the prediction pipeline uses
+# (utils/predictor.py). Absolute so it doesn't depend on cwd when uvicorn
+# is launched from arbitrary directories.
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+CACHE_DIR = PROJECT_ROOT / "data" / "cache" / "f1_cache"
+
 def enable_cache():
-    if not os.path.exists('.fastf1-cache'):
-        os.makedirs('.fastf1-cache')
-    fastf1.Cache.enable_cache('.fastf1-cache')
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    fastf1.Cache.enable_cache(str(CACHE_DIR))
 
 def get_tyre_compound_int(compound: str) -> int:
     mapping = {'SOFT': 1, 'MEDIUM': 2, 'HARD': 3, 'INTERMEDIATE': 4, 'WET': 5}

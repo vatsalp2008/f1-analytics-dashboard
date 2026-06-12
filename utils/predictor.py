@@ -236,7 +236,14 @@ def compute_season_metrics(season_results: dict, sprint_results: dict) -> dict:
 
 # ─── Main pipeline ─────────────────────────────────────────────────────────────
 
-def run_prediction(config: RaceConfig):
+def run_prediction(config: RaceConfig, weather_override: Optional[dict] = None):
+    """Run the full pipeline for one race.
+
+    `weather_override` lets callers skip the live Open-Meteo fetch (useful for
+    backtests on past races, where the forecast window doesn't apply). Pass a
+    dict with the same keys `fetch_race_day_weather` returns:
+    {rain_probability, temperature, humidity, wind_speed}.
+    """
     print(f"\n🏁 2025 {config.race_name.upper()} 🏁")
     print("=" * 70)
     print(f"Round {config.round_number} of 24" + ("  🏃 Sprint weekend" if config.has_sprint else ""))
@@ -256,9 +263,13 @@ def run_prediction(config: RaceConfig):
         leader, pts = max(standings.items(), key=lambda x: x[1])
         print(f"  Championship leader: {leader} ({pts} pts)")
 
-    print("\n🌤️ Fetching weather forecast...")
-    weather = fetch_race_day_weather(lat=config.lat, lon=config.lon)
-    print(f"  Temperature: {weather['temperature']:.1f}°C  |  Rain: {weather['rain_probability']*100:.0f}%")
+    if weather_override is not None:
+        weather = weather_override
+        print(f"\n🌤️ Weather override (backtest): {weather['temperature']:.1f}°C, rain {weather['rain_probability']*100:.0f}%")
+    else:
+        print("\n🌤️ Fetching weather forecast...")
+        weather = fetch_race_day_weather(lat=config.lat, lon=config.lon)
+        print(f"  Temperature: {weather['temperature']:.1f}°C  |  Rain: {weather['rain_probability']*100:.0f}%")
 
     print("\n🏎️ Fetching qualifying...")
     qualifying = fetch_qualifying(config)
