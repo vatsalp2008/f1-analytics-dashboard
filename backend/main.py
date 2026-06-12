@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from backend import f1_service
+from backend import f1_service, predictions_service
 import uvicorn
 
 app = FastAPI(title="F1 Race Replay API")
@@ -28,6 +28,17 @@ async def get_telemetry(year: int, round_number: int, session_type: str):
         if data is None:
             raise HTTPException(status_code=404, detail="No telemetry data found for this session")
         return data
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/predictions/{year}/{round_number}")
+async def get_predictions(year: int, round_number: int):
+    try:
+        return predictions_service.get_prediction(year, round_number)
+    except (KeyError, ValueError) as e:
+        raise HTTPException(status_code=404, detail=str(e))
     except Exception as e:
         import traceback
         traceback.print_exc()

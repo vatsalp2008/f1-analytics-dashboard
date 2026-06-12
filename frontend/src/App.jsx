@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import RaceMenu from './components/RaceMenu';
 import ReplayEngine from './components/ReplayEngine';
+import PredictionsView from './components/PredictionsView';
 import './index.css';
 
 const API_BASE_URL = 'http://localhost:8000/api';
 
 function App() {
+  const [view, setView] = useState('replay'); // 'replay' | 'predictions'
   const [year, setYear] = useState(2025);
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -57,28 +59,50 @@ function App() {
     <div className="app-container">
       <header className="main-header glass-panel">
         <div className="logo-section">
-          <h1 style={{ color: 'var(--accent-red)' }}>F1 <span style={{ color: 'white' }}>RACE REPLAY</span></h1>
-          <p className="subtitle">Interactive Telemetry Visualization</p>
+          <h1 style={{ color: 'var(--accent-red)' }}>F1 <span style={{ color: 'white' }}>ANALYTICS</span></h1>
+          <p className="subtitle">Predictions + Telemetry Replay</p>
         </div>
+        <nav className="tab-strip">
+          <button
+            className={`tab-btn ${view === 'replay' ? 'active' : ''}`}
+            onClick={() => setView('replay')}
+          >
+            Race Replay
+          </button>
+          <button
+            className={`tab-btn ${view === 'predictions' ? 'active' : ''}`}
+            onClick={() => setView('predictions')}
+          >
+            Predictions
+          </button>
+        </nav>
       </header>
 
       <main className="main-content">
-        <RaceMenu 
-          year={year}
-          setYear={setYear}
-          events={events}
-          selectedEvent={selectedEvent}
-          setSelectedEvent={setSelectedEvent}
-          sessionType={sessionType}
-          setSessionType={setSessionType}
-          onLaunch={handleLaunchReplay}
-          loading={loading}
-          error={error}
-        />
+        {view === 'replay' ? (
+          <RaceMenu
+            year={year}
+            setYear={setYear}
+            events={events}
+            selectedEvent={selectedEvent}
+            setSelectedEvent={setSelectedEvent}
+            sessionType={sessionType}
+            setSessionType={setSessionType}
+            onLaunch={handleLaunchReplay}
+            loading={loading}
+            error={error}
+          />
+        ) : (
+          <PredictionsView
+            apiBaseUrl={API_BASE_URL}
+            year={year}
+            events={events}
+          />
+        )}
       </main>
 
       <footer className="main-footer">
-        <p>© 2026 F1 Race Replay • Built for Data-Loving Fans</p>
+        <p>© 2026 F1 Analytics Dashboard</p>
       </footer>
 
       <style jsx>{`
@@ -99,6 +123,35 @@ function App() {
           justify-content: space-between;
           align-items: center;
           animation: slideDown 0.5s ease-out;
+        }
+
+        .tab-strip {
+          display: flex;
+          gap: 0.5rem;
+        }
+
+        .tab-btn {
+          padding: 0.6rem 1.2rem;
+          background: transparent;
+          border: 1px solid var(--border-color);
+          color: var(--text-secondary);
+          border-radius: 6px;
+          cursor: pointer;
+          font-size: 0.875rem;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          transition: all 0.15s ease;
+        }
+
+        .tab-btn:hover {
+          color: var(--text-primary);
+          border-color: var(--text-secondary);
+        }
+
+        .tab-btn.active {
+          background: var(--accent-red);
+          border-color: var(--accent-red);
+          color: white;
         }
 
         .subtitle {
