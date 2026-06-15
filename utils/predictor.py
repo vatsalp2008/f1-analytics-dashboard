@@ -236,13 +236,20 @@ def compute_season_metrics(season_results: dict, sprint_results: dict) -> dict:
 
 # ─── Main pipeline ─────────────────────────────────────────────────────────────
 
-def run_prediction(config: RaceConfig, weather_override: Optional[dict] = None):
+def run_prediction(
+    config: RaceConfig,
+    weather_override: Optional[dict] = None,
+    model_override: Optional[str] = None,
+):
     """Run the full pipeline for one race.
 
     `weather_override` lets callers skip the live Open-Meteo fetch (useful for
     backtests on past races, where the forecast window doesn't apply). Pass a
     dict with the same keys `fetch_race_day_weather` returns:
     {rain_probability, temperature, humidity, wind_speed}.
+
+    `model_override` ("gbm" or "xgboost") forces the regression model
+    regardless of what the config specifies. Used by the model-sweep backtest.
     """
     print(f"\n🏁 2025 {config.race_name.upper()} 🏁")
     print("=" * 70)
@@ -335,7 +342,8 @@ def run_prediction(config: RaceConfig, weather_override: Optional[dict] = None):
     else:
         X_train, X_test, y_train, y_test = X_imputed, X_imputed, y, y
 
-    if config.model_type == "xgboost":
+    active_model = model_override or config.model_type
+    if active_model == "xgboost":
         try:
             import xgboost as xgb
             model = xgb.XGBRegressor(
@@ -392,7 +400,7 @@ def run_prediction(config: RaceConfig, weather_override: Optional[dict] = None):
 
     if len(X_test) > 0:
         mae = mean_absolute_error(y_test, model.predict(X_test))
-        print(f"\n📊 Model MAE: {mae:.3f}s  ({config.model_type.upper()}, {len(feature_columns)} features)")
+        print(f"\n📊 Model MAE: {mae:.3f}s  ({active_model.upper()}, {len(feature_columns)} features)")
 
     importance = pd.DataFrame({
         "Feature": feature_columns,

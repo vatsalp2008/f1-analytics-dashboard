@@ -13,6 +13,7 @@ CONFIG = RaceConfig(
     lat=25.4900,
     lon=51.4542,
     has_sprint=True,
+    model_type="xgboost",
 )
 
 if __name__ == "__main__":

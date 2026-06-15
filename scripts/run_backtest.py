@@ -30,7 +30,13 @@ def main() -> None:
                         help="Where to write JSON (default: backtest_results/{year}.json)")
     parser.add_argument("--verbose", action="store_true",
                         help="Show full run_prediction output (noisy)")
+    parser.add_argument("--sweep-models", action="store_true",
+                        help="Run each round through gbm AND xgboost; print per-round winner table")
     args = parser.parse_args()
+
+    if args.sweep_models:
+        run_sweep(args)
+        return
 
     df = backtest_year(args.year, rounds=args.rounds, quiet=not args.verbose)
     if df.empty:
@@ -70,6 +76,65 @@ def main() -> None:
         ],
     }
     out_path.write_text(json.dumps(payload, indent=2))
+    print(f"\n✅ Wrote {out_path}")
+
+
+def run_sweep(args) -> None:
+    """Run each round under both gbm and xgboost, print per-round winner."""
+    import pandas as pd
+    MODELS = ("gbm", "xgboost")
+
+    runs: dict[str, "pd.DataFrame"] = {}
+    for m in MODELS:
+        print(f"\n=== Sweeping model = {m} ===")
+        runs[m] = backtest_year(args.year, rounds=args.rounds, quiet=not args.verbose,
+                                 model_override=m)
+
+    # Join on round
+    join = runs["gbm"][["round", "race", "spearman_rho", "weighted_position_err",
+                       "top3_hit_rate", "mae_position"]].rename(columns={
+        "spearman_rho": "ρ_gbm", "weighted_position_err": "wpe_gbm",
+        "top3_hit_rate": "top3_gbm", "mae_position": "mae_gbm",
+    })
+    xgb_cols = runs["xgboost"][["round", "spearman_rho", "weighted_position_err",
+                               "top3_hit_rate", "mae_position"]].rename(columns={
+        "spearman_rho": "ρ_xgb", "weighted_position_err": "wpe_xgb",
+        "top3_hit_rate": "top3_xgb", "mae_position": "mae_xgb",
+    })
+    j = join.merge(xgb_cols, on="round")
+    j["Δwpe"] = j["wpe_xgb"] - j["wpe_gbm"]  # negative = xgboost wins
+    j["winner"] = j.apply(
+        lambda r: "xgboost" if r["wpe_xgb"] < r["wpe_gbm"] * 0.95
+                  else ("gbm" if r["wpe_gbm"] < r["wpe_xgb"] * 0.95 else "tie"),
+        axis=1,
+    )
+
+    print("\n" + "=" * 100)
+    print(f"MODEL SWEEP — {args.year} (winner = the model with weighted_position_err >=5% lower)")
+    print("=" * 100)
+    cols = ["round", "race", "ρ_gbm", "ρ_xgb", "wpe_gbm", "wpe_xgb", "Δwpe", "winner"]
+    print(j[cols].to_string(index=False, float_format=lambda x: f"{x:.3f}"))
+
+    print("\n" + "-" * 100)
+    counts = j["winner"].value_counts().to_dict()
+    print(f"  Winner counts: {counts}")
+    print(f"  Mean ρ (gbm)     : {j['ρ_gbm'].mean():+.3f}")
+    print(f"  Mean ρ (xgboost) : {j['ρ_xgb'].mean():+.3f}")
+    print(f"  Mean wpe (gbm)   : {j['wpe_gbm'].mean():.2f}")
+    print(f"  Mean wpe (xgboost): {j['wpe_xgb'].mean():.2f}")
+
+    out_path = args.out or Path(__file__).resolve().parents[1] / "backtest_results" / f"{args.year}_sweep.json"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps({
+        "year": args.year,
+        "models": list(MODELS),
+        "per_race": j[cols].to_dict(orient="records"),
+        "summary": {
+            "winner_counts": counts,
+            "mean_rho": {m: float(runs[m]["spearman_rho"].mean()) for m in MODELS},
+            "mean_wpe": {m: float(runs[m]["weighted_position_err"].mean()) for m in MODELS},
+        },
+    }, indent=2))
     print(f"\n✅ Wrote {out_path}")
 
 

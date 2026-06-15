@@ -114,6 +114,7 @@ def backtest_year(
     year: int,
     rounds: Optional[Iterable[int]] = None,
     quiet: bool = True,
+    model_override: Optional[str] = None,
 ) -> pd.DataFrame:
     """Backtest all completed rounds of `year`.
 
@@ -122,6 +123,10 @@ def backtest_year(
 
     `quiet=True` suppresses run_prediction's verbose stdout — only summary
     lines from this module are printed.
+
+    `model_override` (None | "gbm" | "xgboost") forces every race to use the
+    same model regardless of its `RaceConfig.model_type`. Used by the
+    --sweep-models CLI flag to compare model choices head-to-head.
     """
     if year != 2025:
         # The registry only knows 2025 configs right now. Easy to extend later.
@@ -145,12 +150,17 @@ def backtest_year(
             print(f"  ⚠️ Could not fetch actual: {str(exc)[:80]}")
             continue
 
-        print(f"[backtest] R{r:>2} {config.fastf1_name} — running prediction (model={config.model_type})...")
+        active_model = model_override or config.model_type
+        print(f"[backtest] R{r:>2} {config.fastf1_name} — running prediction (model={active_model})...")
         sink = io.StringIO() if quiet else None
         cm = contextlib.redirect_stdout(sink) if quiet else contextlib.nullcontext()
         with cm:
             try:
-                predicted_df = run_prediction(config, weather_override=BACKTEST_WEATHER)
+                predicted_df = run_prediction(
+                    config,
+                    weather_override=BACKTEST_WEATHER,
+                    model_override=model_override,
+                )
             except Exception as exc:
                 predicted_df = None
                 err = str(exc)[:80]
@@ -162,7 +172,7 @@ def backtest_year(
         metrics.update({
             "round": r,
             "race": config.race_name,
-            "model": config.model_type,
+            "model": active_model,
         })
         rows.append(metrics)
         print(

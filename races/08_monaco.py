@@ -19,6 +19,7 @@ CONFIG = RaceConfig(
     form_weight=0.20,
     max_positions_gained=3,
     max_positions_lost=5,
+    model_type="xgboost",
 )
 
 if __name__ == "__main__":

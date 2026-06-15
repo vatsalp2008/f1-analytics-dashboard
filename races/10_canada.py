@@ -12,6 +12,7 @@ CONFIG = RaceConfig(
     fastf1_name="Canada",
     lat=45.5048,
     lon=-73.5224,
+    model_type="xgboost",
 )
 
 if __name__ == "__main__":

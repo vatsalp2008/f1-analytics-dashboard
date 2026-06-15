@@ -13,6 +13,7 @@ CONFIG = RaceConfig(
     circuit_key="Suzuka",
     lat=34.8431,
     lon=136.5406,
+    model_type="xgboost",
 )
 
 if __name__ == "__main__":
