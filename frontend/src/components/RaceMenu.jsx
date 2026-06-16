@@ -1,5 +1,6 @@
 import React from 'react';
 import { Calendar, Play, Loader2, ChevronRight, Info } from 'lucide-react';
+import { flagFromCountryCode, formatRaceDate } from '../utils/format';
 
 const RaceMenu = ({
     year, setYear, events, selectedEvent, setSelectedEvent,
@@ -45,8 +46,11 @@ const RaceMenu = ({
                                     className={`menu-item event-item ${selectedEvent === event.round ? 'active' : ''}`}
                                     onClick={() => setSelectedEvent(event.round)}
                                 >
+                                    <span className="flag" aria-hidden="true">
+                                        {flagFromCountryCode(event.country_code)}
+                                    </span>
                                     <div className="event-info">
-                                        <span className="round-no">RD {event.round}</span>
+                                        <span className="round-no">RD {event.round} · {formatRaceDate(event.date)}</span>
                                         <span className="event-name">{event.name}</span>
                                     </div>
                                     {event.has_sprint && <span className="sprint-tag">Sprint</span>}
@@ -150,8 +154,9 @@ const RaceMenu = ({
         .menu-item {
           text-align: left;
           padding: 0.75rem 1rem;
-          background: rgba(255, 255, 255, 0.03);
-          color: var(--text-secondary);
+          background: var(--card-bg);
+          border: 1px solid var(--border-color);
+          color: var(--text-primary);
           border-radius: 6px;
           font-size: 0.875rem;
           display: flex;
@@ -160,24 +165,34 @@ const RaceMenu = ({
         }
 
         .menu-item:hover {
-          background: rgba(255, 255, 255, 0.08);
-          color: var(--text-primary);
+          background: var(--elevated-tint);
+          border-color: var(--text-secondary);
         }
 
         .menu-item.active {
           background: var(--accent-red);
+          border-color: var(--accent-red);
           color: white;
           font-weight: bold;
         }
 
         .event-item {
           padding: 1rem;
+          gap: 0.75rem;
+        }
+
+        .flag {
+          font-size: 1.4rem;
+          line-height: 1;
+          flex-shrink: 0;
         }
 
         .event-info {
           display: flex;
           flex-direction: column;
           gap: 0.25rem;
+          flex: 1;
+          min-width: 0;
         }
 
         .round-no {
@@ -192,11 +207,11 @@ const RaceMenu = ({
 
         .sprint-tag {
           font-size: 0.625rem;
-          background: rgba(0, 210, 190, 0.1);
+          background: rgba(0, 167, 138, 0.12);
           color: var(--success-green);
           padding: 0.2rem 0.5rem;
           border-radius: 4px;
-          border: 1px solid rgba(0, 210, 190, 0.2);
+          border: 1px solid rgba(0, 167, 138, 0.25);
         }
 
         .config-box {
@@ -219,13 +234,14 @@ const RaceMenu = ({
 
         .session-btn {
           padding: 0.5rem;
-          background: #2d3748;
+          background: var(--elevated-tint);
+          border: 1px solid var(--border-color);
           color: var(--text-secondary);
           font-weight: bold;
         }
 
         .session-btn.active {
-          background: #4a5568;
+          background: var(--accent-red);
           color: white;
           border: 1px solid var(--accent-red);
         }
@@ -273,12 +289,13 @@ const RaceMenu = ({
         }
 
         .error-msg {
-          color: #ff4d4d;
+          color: var(--accent-red);
           font-size: 0.75rem;
           display: flex;
           align-items: center;
           gap: 0.4rem;
-          background: rgba(255, 77, 77, 0.1);
+          background: rgba(225, 6, 0, 0.08);
+          border: 1px solid rgba(225, 6, 0, 0.25);
           padding: 0.75rem;
           border-radius: 6px;
         }

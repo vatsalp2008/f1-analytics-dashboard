@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Loader2, ChevronRight, TrendingUp, TrendingDown, Minus } from 'lucide-react';
+import { flagFromCountryCode, formatRaceDate } from '../utils/format';
 
 const PredictionsView = ({ apiBaseUrl, year, events }) => {
   const [selectedRound, setSelectedRound] = useState(null);
@@ -37,8 +38,11 @@ const PredictionsView = ({ apiBaseUrl, year, events }) => {
                 onClick={() => fetchPrediction(event.round)}
                 disabled={loading}
               >
+                <span className="flag" aria-hidden="true">
+                  {flagFromCountryCode(event.country_code)}
+                </span>
                 <div className="event-info">
-                  <span className="round-no">RD {event.round}</span>
+                  <span className="round-no">RD {event.round} · {formatRaceDate(event.date)}</span>
                   <span className="event-name">{event.name}</span>
                 </div>
                 {event.has_sprint && <span className="sprint-tag">Sprint</span>}
@@ -50,11 +54,26 @@ const PredictionsView = ({ apiBaseUrl, year, events }) => {
 
         {/* Results panel */}
         <div className="section-column results-column">
-          <h3>
-            {prediction
-              ? `${prediction.race_name} — ${prediction.model.toUpperCase()}`
-              : 'Predicted Finishing Order'}
-          </h3>
+          {prediction ? (() => {
+            const evt = events.find(e => e.round === prediction.round);
+            return (
+              <div className="results-header">
+                <span className="results-flag" aria-hidden="true">
+                  {flagFromCountryCode(evt?.country_code)}
+                </span>
+                <div>
+                  <h3 className="results-title">
+                    {prediction.race_name} — {prediction.model.toUpperCase()}
+                  </h3>
+                  {evt?.date && (
+                    <div className="results-date">{formatRaceDate(evt.date)}</div>
+                  )}
+                </div>
+              </div>
+            );
+          })() : (
+            <h3>Predicted Finishing Order</h3>
+          )}
 
           {!selectedRound && !loading && (
             <div className="placeholder">
@@ -154,7 +173,8 @@ const PredictionsView = ({ apiBaseUrl, year, events }) => {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          background: rgba(255,255,255,0.03);
+          gap: 0.6rem;
+          background: var(--card-bg);
           border: 1px solid var(--border-color);
           color: var(--text-primary);
           padding: 0.6rem 0.75rem;
@@ -165,8 +185,37 @@ const PredictionsView = ({ apiBaseUrl, year, events }) => {
           font-size: 0.85rem;
         }
 
+        .flag {
+          font-size: 1.3rem;
+          line-height: 1;
+          flex-shrink: 0;
+        }
+
+        .results-header {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          margin: 0 0 0.75rem 0;
+        }
+
+        .results-flag {
+          font-size: 1.8rem;
+          line-height: 1;
+        }
+
+        .results-title {
+          margin: 0;
+        }
+
+        .results-date {
+          font-size: 0.75rem;
+          color: var(--text-secondary);
+          letter-spacing: 0.05em;
+          margin-top: 0.15rem;
+        }
+
         .menu-item:hover:not(:disabled) {
-          background: rgba(255,255,255,0.07);
+          background: var(--elevated-tint);
           border-color: var(--text-secondary);
         }
 
@@ -184,6 +233,8 @@ const PredictionsView = ({ apiBaseUrl, year, events }) => {
         .event-info {
           display: flex;
           flex-direction: column;
+          flex: 1;
+          min-width: 0;
         }
 
         .round-no {
@@ -202,11 +253,12 @@ const PredictionsView = ({ apiBaseUrl, year, events }) => {
 
         .sprint-tag {
           font-size: 0.65rem;
-          background: rgba(0,210,190,0.2);
+          background: rgba(0,167,138,0.12);
           color: var(--success-green);
           padding: 0.15rem 0.4rem;
           border-radius: 3px;
           letter-spacing: 0.05em;
+          border: 1px solid rgba(0,167,138,0.25);
         }
 
         .placeholder, .loader-container {
@@ -239,8 +291,8 @@ const PredictionsView = ({ apiBaseUrl, year, events }) => {
         }
 
         .error-msg {
-          background: rgba(225,6,0,0.15);
-          border: 1px solid var(--accent-red);
+          background: rgba(225,6,0,0.08);
+          border: 1px solid rgba(225,6,0,0.35);
           color: var(--accent-red);
           padding: 0.75rem 1rem;
           border-radius: 6px;
@@ -269,11 +321,11 @@ const PredictionsView = ({ apiBaseUrl, year, events }) => {
           border-bottom: 1px solid var(--border-color);
           position: sticky;
           top: 0;
-          background: rgba(20,20,25,0.95);
+          background: var(--card-bg);
         }
 
         .table-row {
-          border-bottom: 1px solid rgba(255,255,255,0.04);
+          border-bottom: 1px solid var(--border-color);
         }
 
         .table-row.podium {
@@ -281,7 +333,7 @@ const PredictionsView = ({ apiBaseUrl, year, events }) => {
         }
 
         .table-row:hover {
-          background: rgba(255,255,255,0.04);
+          background: var(--elevated-tint);
         }
 
         .col-pos {

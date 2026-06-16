@@ -59,7 +59,7 @@ function App() {
     <div className="app-container">
       <header className="main-header glass-panel">
         <div className="logo-section">
-          <h1 style={{ color: 'var(--accent-red)' }}>F1 <span style={{ color: 'white' }}>ANALYTICS</span></h1>
+          <h1 style={{ color: 'var(--accent-red)' }}>F1 <span style={{ color: 'var(--text-primary)' }}>ANALYTICS</span></h1>
           <p className="subtitle">Predictions + Telemetry Replay</p>
         </div>
         <nav className="tab-strip">
@@ -112,9 +112,9 @@ function App() {
           flex-direction: column;
           padding: 2rem;
           gap: 2rem;
-          background-image: 
-            radial-gradient(circle at 10% 20%, rgba(225, 6, 0, 0.05) 0%, transparent 40%),
-            radial-gradient(circle at 90% 80%, rgba(0, 210, 190, 0.05) 0%, transparent 40%);
+          background-image:
+            radial-gradient(circle at 10% 20%, rgba(225, 6, 0, 0.07) 0%, transparent 45%),
+            radial-gradient(circle at 90% 80%, rgba(0, 167, 138, 0.07) 0%, transparent 45%);
         }
 
         .main-header {

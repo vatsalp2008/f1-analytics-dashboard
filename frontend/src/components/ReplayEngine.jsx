@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Pause, Play, RotateCcw, ChevronLeft, FastForward, Rewind, Info, Wind, Thermometer, Droplets, CloudRain } from 'lucide-react';
+import { flagFromCountryCode, formatRaceDate } from '../utils/format';
 
 const ReplayEngine = ({ data, onBack }) => {
     // Defensive check for data
@@ -25,7 +26,7 @@ const ReplayEngine = ({ data, onBack }) => {
         );
     }
 
-    const { frames, driver_colors, total_laps, event_name } = data;
+    const { frames, driver_colors, total_laps, event_name, country_code, date } = data;
 
     // State
     const [isPlaying, setIsPlaying] = useState(true);
@@ -134,13 +135,20 @@ const ReplayEngine = ({ data, onBack }) => {
                     <div className="lap-counter">Lap: {firstDriver?.lap || 0}/{total_laps}</div>
                     <div className="race-timer">Race Time: {formatClock(currentTime)} (x{playbackSpeed.toFixed(1)})</div>
                 </div>
+                <div className="race-title">
+                    <span className="race-flag" aria-hidden="true">{flagFromCountryCode(country_code)}</span>
+                    <div className="race-title-text">
+                        <div className="race-name">{event_name || 'Race'}</div>
+                        {date && <div className="race-date">{formatRaceDate(date)}</div>}
+                    </div>
+                </div>
                 <button onClick={onBack} className="btn-exit">EXIT REPLAY</button>
             </header>
 
             <main className="main-viewport">
                 <aside className="left-panel">
                     <section className="weather-card glass">
-                        <h4>Weather (Bahrain)</h4>
+                        <h4>Weather</h4>
                         <div className="weather-grid">
                             <div className="w-item"><Thermometer size={14} /> Track: 23.3°C</div>
                             <div className="w-item"><Thermometer size={14} /> Air: 18.5°C</div>
@@ -220,10 +228,16 @@ const ReplayEngine = ({ data, onBack }) => {
 
             <style jsx>{`
                 .replay-container { width: 100vw; height: 100vh; background: #000; color: #fff; display: flex; flex-direction: column; padding: 20px; overflow: hidden; font-family: 'Inter', sans-serif; }
-                .top-bar { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+                .top-bar { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; gap: 16px; }
                 .lap-counter { font-size: 1.5rem; font-weight: 800; }
                 .race-timer { color: #888; font-size: 0.9rem; margin-top: 4px; }
-                .btn-exit { background: #e10600; color: white; border: none; padding: 8px 16px; font-weight: 800; border-radius: 4px; cursor: pointer; }
+                .race-info { flex: 0 0 auto; }
+                .race-title { flex: 1; display: flex; align-items: center; justify-content: center; gap: 12px; min-width: 0; }
+                .race-flag { font-size: 2rem; line-height: 1; }
+                .race-title-text { text-align: left; }
+                .race-name { font-size: 1.05rem; font-weight: 700; letter-spacing: 0.03em; color: #fff; }
+                .race-date { font-size: 0.75rem; color: #888; letter-spacing: 0.05em; margin-top: 2px; }
+                .btn-exit { background: #e10600; color: white; border: none; padding: 8px 16px; font-weight: 800; border-radius: 4px; cursor: pointer; flex: 0 0 auto; }
                 .main-viewport { flex: 1; display: flex; gap: 20px; min-height: 0; }
                 .left-panel { width: 280px; display: flex; flex-direction: column; gap: 15px; }
                 .right-panel { width: 220px; padding: 15px; display: flex; flex-direction: column; }

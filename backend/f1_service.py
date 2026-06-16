@@ -4,6 +4,7 @@ from pathlib import Path
 import fastf1
 import fastf1.plotting
 import numpy as np
+import pandas as pd
 import pickle
 import gzip
 from datetime import timedelta
@@ -52,13 +53,16 @@ def get_driver_colors(session):
 
 def get_race_telemetry_json(year: int, round_number: int, session_type: str = 'R'):
     enable_cache()
-    
-    # Check for processed cache
+
+    # v2: drops drivers whose telemetry hasn't started / has ended (was previously
+    # frozen at first/last recorded position by np.interp's default clamping).
+    # v2: payload now includes country_code + date for the race header.
+    # Old v1 cache files are left on disk but no longer read.
     processed_dir = os.path.join('.fastf1-cache', 'processed')
     if not os.path.exists(processed_dir):
         os.makedirs(processed_dir)
-    
-    cache_filename = f"{year}_{round_number}_{session_type}_processed.pkl.gz"
+
+    cache_filename = f"{year}_{round_number}_{session_type}_v2_processed.pkl.gz"
     cache_path = os.path.join(processed_dir, cache_filename)
     
     if os.path.exists(cache_path):
@@ -119,11 +123,14 @@ def get_race_telemetry_json(year: int, round_number: int, session_type: str = 'R
     resampled_drivers = {}
     for code, data in driver_data.items():
         t_shifted = data["t"] - global_t_min
+        # left=NaN / right=NaN so drivers whose telemetry hasn't started yet (or
+        # has ended due to DNF/red-flag) don't get clamped to their first/last
+        # recorded position — we'll drop them from the frame instead.
         resampled_drivers[code] = {
-            "x": np.interp(timeline, t_shifted, data["x"]),
-            "y": np.interp(timeline, t_shifted, data["y"]),
-            "dist": np.interp(timeline, t_shifted, data["dist"]),
-            "lap": np.interp(timeline, t_shifted, data["lap"]),
+            "x": np.interp(timeline, t_shifted, data["x"], left=np.nan, right=np.nan),
+            "y": np.interp(timeline, t_shifted, data["y"], left=np.nan, right=np.nan),
+            "dist": np.interp(timeline, t_shifted, data["dist"], left=np.nan, right=np.nan),
+            "lap": np.interp(timeline, t_shifted, data["lap"], left=np.nan, right=np.nan),
             "speed": np.interp(timeline, t_shifted, data["speed"]),
             "gear": np.interp(timeline, t_shifted, data["gear"]),
             "drs": np.interp(timeline, t_shifted, data["drs"]),
@@ -134,6 +141,9 @@ def get_race_telemetry_json(year: int, round_number: int, session_type: str = 'R
     for i in range(len(timeline)):
         frame_drivers = {}
         for code, res in resampled_drivers.items():
+            # Skip drivers who aren't on track at this moment (NaN position).
+            if np.isnan(res["x"][i]) or np.isnan(res["y"][i]):
+                continue
             frame_drivers[code] = {
                 "x": float(res["x"][i]), "y": float(res["y"][i]), "dist": float(res["dist"][i]),
                 "lap": int(res["lap"][i]), "speed": float(res["speed"][i]), "gear": int(res["gear"][i]),
@@ -152,9 +162,15 @@ def get_race_telemetry_json(year: int, round_number: int, session_type: str = 'R
             track_map = [{"x": float(x), "y": float(y)} for x, y in zip(tel["X"].to_numpy(), tel["Y"].to_numpy())]
     except: pass
 
+    event_name = session.event['EventName']
+    ev_date = session.event.get('EventDate')
+    date_str = ev_date.strftime("%Y-%m-%d") if pd.notna(ev_date) else None
     result = {
         "frames": frames, "driver_colors": get_driver_colors(session),
-        "total_laps": int(max_lap_number), "event_name": session.event['EventName'],
+        "total_laps": int(max_lap_number),
+        "event_name": event_name,
+        "country_code": COUNTRY_CODES.get(event_name, ""),
+        "date": date_str,
         "track_map": track_map
     }
 
@@ -168,13 +184,52 @@ def get_race_telemetry_json(year: int, round_number: int, session_type: str = 'R
 
     return result
 
+# ISO 3166-1 alpha-2 country codes by FastF1 EventName. Hardcoded since
+# FastF1's `Country` column varies and would need its own name-to-ISO map.
+# Used by the frontend to render a country flag emoji (regional indicators).
+COUNTRY_CODES = {
+    "Bahrain Grand Prix": "BH",
+    "Saudi Arabian Grand Prix": "SA",
+    "Australian Grand Prix": "AU",
+    "Japanese Grand Prix": "JP",
+    "Chinese Grand Prix": "CN",
+    "Miami Grand Prix": "US",
+    "Emilia Romagna Grand Prix": "IT",
+    "Monaco Grand Prix": "MC",
+    "Canadian Grand Prix": "CA",
+    "Spanish Grand Prix": "ES",
+    "Austrian Grand Prix": "AT",
+    "British Grand Prix": "GB",
+    "Hungarian Grand Prix": "HU",
+    "Belgian Grand Prix": "BE",
+    "Dutch Grand Prix": "NL",
+    "Italian Grand Prix": "IT",
+    "Azerbaijan Grand Prix": "AZ",
+    "Singapore Grand Prix": "SG",
+    "United States Grand Prix": "US",
+    "Mexico City Grand Prix": "MX",
+    "São Paulo Grand Prix": "BR",
+    "Las Vegas Grand Prix": "US",
+    "Qatar Grand Prix": "QA",
+    "Abu Dhabi Grand Prix": "AE",
+}
+
+
 def get_events(year: int):
     events = fastf1.get_event_schedule(year)
     result = []
     for _, event in events.iterrows():
         if event['EventFormat'] == 'testing': continue
+        name = event['EventName']
+        # EventDate is the Sunday race date as a pandas Timestamp; emit ISO yyyy-mm-dd.
+        ev_date = event.get('EventDate')
+        date_str = ev_date.strftime("%Y-%m-%d") if pd.notna(ev_date) else None
         result.append({
-            "round": int(event['RoundNumber']), "name": event['EventName'],
-            "location": event['Location'], "has_sprint": event['EventFormat'] in ['sprint', 'sprint_qualifying', 'sprint_shootout']
+            "round": int(event['RoundNumber']),
+            "name": name,
+            "location": event['Location'],
+            "country_code": COUNTRY_CODES.get(name, ""),
+            "date": date_str,
+            "has_sprint": event['EventFormat'] in ['sprint', 'sprint_qualifying', 'sprint_shootout']
         })
     return result
