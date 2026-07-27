@@ -3,9 +3,18 @@ import axios from 'axios';
 import RaceMenu from './components/RaceMenu';
 import ReplayEngine from './components/ReplayEngine';
 import PredictionsView from './components/PredictionsView';
+import Particles from './reactbits/Particles/Particles';
+import SplitText from './reactbits/SplitText/SplitText';
+import ShinyText from './reactbits/ShinyText/ShinyText';
+import GooeyNav from './reactbits/GooeyNav/GooeyNav';
 import './index.css';
 
 const API_BASE_URL = 'http://localhost:8000/api';
+
+const NAV_ITEMS = [
+  { label: 'Race Replay', href: '#replay' },
+  { label: 'Predictions', href: '#predictions' },
+];
 
 function App() {
   const [view, setView] = useState('replay'); // 'replay' | 'predictions'
@@ -48,34 +57,62 @@ function App() {
 
   if (telemetry) {
     return (
-      <ReplayEngine 
-        data={telemetry} 
-        onBack={() => setTelemetry(null)} 
+      <ReplayEngine
+        data={telemetry}
+        onBack={() => setTelemetry(null)}
       />
     );
   }
 
   return (
     <div className="app-container">
-      <header className="main-header glass-panel">
-        <div className="logo-section">
-          <h1 style={{ color: 'var(--accent-red)' }}>F1 <span style={{ color: 'var(--text-primary)' }}>ANALYTICS</span></h1>
-          <p className="subtitle">Predictions + Telemetry Replay</p>
+      <header className="main-header">
+        <div className="header-bg">
+          <Particles
+            className="header-particles"
+            particleColors={['#e10600', '#ff4d4d', '#ffffff']}
+            particleCount={160}
+            particleSpread={12}
+            speed={0.08}
+            particleBaseSize={70}
+            alphaParticles
+            moveParticlesOnHover
+            particleHoverFactor={1.5}
+            disableRotation={false}
+          />
         </div>
-        <nav className="tab-strip">
-          <button
-            className={`tab-btn ${view === 'replay' ? 'active' : ''}`}
-            onClick={() => setView('replay')}
-          >
-            Race Replay
-          </button>
-          <button
-            className={`tab-btn ${view === 'predictions' ? 'active' : ''}`}
-            onClick={() => setView('predictions')}
-          >
-            Predictions
-          </button>
-        </nav>
+
+        <div className="header-inner">
+          <div className="logo-section">
+            <SplitText
+              text="F1 ANALYTICS"
+              className="logo-title"
+              tag="h1"
+              splitType="chars"
+              delay={40}
+              duration={0.9}
+              from={{ opacity: 0, y: 50, rotateX: -90 }}
+              to={{ opacity: 1, y: 0, rotateX: 0 }}
+              textAlign="left"
+            />
+            <ShinyText
+              text="PREDICTIONS · TELEMETRY REPLAY · 2025 SEASON"
+              className="logo-subtitle"
+              speed={4}
+              color="#8b93a7"
+              shineColor="#ffffff"
+              spread={90}
+            />
+          </div>
+
+          <GooeyNav
+            items={NAV_ITEMS}
+            initialActiveIndex={view === 'replay' ? 0 : 1}
+            particleCount={14}
+            animationTime={600}
+            onItemClick={(i) => setView(i === 0 ? 'replay' : 'predictions')}
+          />
+        </div>
       </header>
 
       <main className="main-content">
@@ -107,59 +144,67 @@ function App() {
 
       <style jsx>{`
         .app-container {
-          height: 100vh;
+          height: 100%;
           display: flex;
           flex-direction: column;
-          padding: 2rem;
-          gap: 2rem;
+          padding: 1.5rem;
+          gap: 1.5rem;
           background-image:
             radial-gradient(circle at 10% 20%, rgba(225, 6, 0, 0.07) 0%, transparent 45%),
             radial-gradient(circle at 90% 80%, rgba(0, 167, 138, 0.07) 0%, transparent 45%);
         }
 
         .main-header {
-          padding: 1.5rem 2rem;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
+          position: relative;
+          border-radius: 18px;
+          overflow: hidden;
+          background: linear-gradient(120deg, #0b0e14 0%, #15181f 55%, #241012 100%);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          box-shadow: 0 18px 45px rgba(11, 14, 20, 0.22);
           animation: slideDown 0.5s ease-out;
         }
 
-        .tab-strip {
+        .header-bg {
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          opacity: 0.9;
+          -webkit-mask-image: linear-gradient(90deg, transparent, #000 25%, #000 100%);
+          mask-image: linear-gradient(90deg, transparent, #000 25%, #000 100%);
+        }
+
+        .header-bg .header-particles {
+          width: 100%;
+          height: 100%;
+        }
+
+        .header-inner {
+          position: relative;
+          z-index: 1;
+          padding: 1.6rem 2rem;
           display: flex;
-          gap: 0.5rem;
+          justify-content: space-between;
+          align-items: center;
+          gap: 1.5rem;
+          flex-wrap: wrap;
         }
 
-        .tab-btn {
-          padding: 0.6rem 1.2rem;
-          background: transparent;
-          border: 1px solid var(--border-color);
-          color: var(--text-secondary);
-          border-radius: 6px;
-          cursor: pointer;
-          font-size: 0.875rem;
-          letter-spacing: 0.05em;
-          text-transform: uppercase;
-          transition: all 0.15s ease;
+        .logo-section .logo-title {
+          font-size: 2.4rem;
+          font-weight: 800;
+          letter-spacing: -0.02em;
+          line-height: 1;
+          margin: 0;
+          color: #ffffff;
+          text-shadow: 0 2px 24px rgba(225, 6, 0, 0.35);
         }
 
-        .tab-btn:hover {
-          color: var(--text-primary);
-          border-color: var(--text-secondary);
-        }
-
-        .tab-btn.active {
-          background: var(--accent-red);
-          border-color: var(--accent-red);
-          color: white;
-        }
-
-        .subtitle {
-          color: var(--text-secondary);
-          font-size: 0.875rem;
-          margin-top: 0.25rem;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
+        .logo-section .logo-subtitle {
+          display: inline-block;
+          margin-top: 0.55rem;
+          font-size: 0.72rem;
+          font-weight: 600;
+          letter-spacing: 0.22em;
         }
 
         .main-content {
@@ -174,7 +219,7 @@ function App() {
           text-align: center;
           color: var(--text-secondary);
           font-size: 0.75rem;
-          padding: 1rem;
+          padding: 0.25rem;
         }
 
         @keyframes slideDown {

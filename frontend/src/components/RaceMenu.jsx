@@ -1,6 +1,8 @@
 import React from 'react';
 import { Calendar, Play, Loader2, ChevronRight, Info } from 'lucide-react';
 import { flagFromCountryCode, formatRaceDate } from '../utils/format';
+import SpotlightCard from '../reactbits/SpotlightCard/SpotlightCard';
+import StarBorder from '../reactbits/StarBorder/StarBorder';
 
 const RaceMenu = ({
     year, setYear, events, selectedEvent, setSelectedEvent,
@@ -15,16 +17,17 @@ const RaceMenu = ({
     ];
 
     return (
-        <div className="race-menu glass-panel animate-fade-in">
+        <SpotlightCard className="race-menu light-panel animate-fade-in" spotlightColor="rgba(225, 6, 0, 0.14)">
             <div className="menu-sections">
                 {/* Year Selector */}
                 <div className="section-column years-column">
                     <h3>Season</h3>
                     <div className="scroll-list">
-                        {years.map(y => (
+                        {years.map((y, i) => (
                             <button
                                 key={y}
-                                className={`menu-item ${year === y ? 'active' : ''}`}
+                                className={`menu-item rise-in ${year === y ? 'active' : ''}`}
+                                style={{ animationDelay: `${i * 0.04}s` }}
                                 onClick={() => setYear(y)}
                             >
                                 {y} Season
@@ -40,10 +43,11 @@ const RaceMenu = ({
                         {loading && !events.length ? (
                             <div className="loader-container"><Loader2 className="spinner" /></div>
                         ) : (
-                            events.map(event => (
+                            events.map((event, i) => (
                                 <button
                                     key={event.round}
-                                    className={`menu-item event-item ${selectedEvent === event.round ? 'active' : ''}`}
+                                    className={`menu-item event-item rise-in ${selectedEvent === event.round ? 'active' : ''}`}
+                                    style={{ animationDelay: `${Math.min(i * 0.03, 0.5)}s` }}
                                     onClick={() => setSelectedEvent(event.round)}
                                 >
                                     <span className="flag" aria-hidden="true">
@@ -86,13 +90,17 @@ const RaceMenu = ({
                             </p>
                         </div>
 
-                        <button
-                            className="racing-btn launch-btn"
+                        <StarBorder
+                            as="button"
+                            className="launch-star"
+                            color="#e10600"
+                            speed="4s"
+                            thickness={2}
                             disabled={!selectedEvent || loading}
                             onClick={() => onLaunch(selectedEvent)}
                         >
                             {loading ? <Loader2 className="spinner" /> : <><Play fill="currentColor" size={18} /> Launch Replay</>}
-                        </button>
+                        </StarBorder>
                     </div>
 
                     {error && <div className="error-msg"><Info size={14} /> {error}</div>}
@@ -106,6 +114,32 @@ const RaceMenu = ({
           height: 600px;
           display: flex;
           overflow: hidden;
+        }
+
+        .launch-star {
+          width: 100%;
+          margin-top: auto;
+          border-radius: 12px;
+        }
+
+        .launch-star:disabled {
+          opacity: 0.45;
+          cursor: not-allowed;
+        }
+
+        .launch-star .inner-content {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.6rem;
+          padding: 1rem;
+          border-radius: 12px;
+          border: 1px solid #2a0a0a;
+          background: #0b0e14;
+          font-weight: 800;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          font-size: 0.9rem;
         }
 
         .menu-sections {
@@ -305,7 +339,7 @@ const RaceMenu = ({
           to { transform: rotate(360deg); }
         }
       `}</style>
-        </div>
+        </SpotlightCard>
     );
 };
 

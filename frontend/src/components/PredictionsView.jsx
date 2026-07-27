@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Loader2, ChevronRight, TrendingUp, TrendingDown, Minus } from 'lucide-react';
 import { flagFromCountryCode, formatRaceDate } from '../utils/format';
+import SpotlightCard from '../reactbits/SpotlightCard/SpotlightCard';
+import CountUp from '../reactbits/CountUp/CountUp';
 
 const PredictionsView = ({ apiBaseUrl, year, events }) => {
   const [selectedRound, setSelectedRound] = useState(null);
@@ -25,16 +27,17 @@ const PredictionsView = ({ apiBaseUrl, year, events }) => {
   };
 
   return (
-    <div className="predictions-view glass-panel animate-fade-in">
+    <SpotlightCard className="predictions-view light-panel animate-fade-in" spotlightColor="rgba(225, 6, 0, 0.14)">
       <div className="predictions-layout">
         {/* Round picker */}
         <div className="section-column round-column">
           <h3>Pick a Race ({year})</h3>
           <div className="scroll-list">
-            {events.map(event => (
+            {events.map((event, i) => (
               <button
                 key={event.round}
-                className={`menu-item event-item ${selectedRound === event.round ? 'active' : ''}`}
+                className={`menu-item event-item rise-in ${selectedRound === event.round ? 'active' : ''}`}
+                style={{ animationDelay: `${Math.min(i * 0.03, 0.5)}s` }}
                 onClick={() => fetchPrediction(event.round)}
                 disabled={loading}
               >
@@ -113,7 +116,11 @@ const PredictionsView = ({ apiBaseUrl, year, events }) => {
                 const DeltaIcon = delta > 0 ? TrendingUp : delta < 0 ? TrendingDown : Minus;
                 const deltaClass = delta > 0 ? 'gain' : delta < 0 ? 'loss' : 'flat';
                 return (
-                  <div key={p.Driver} className={`table-row ${finishPos <= 3 ? 'podium' : ''}`}>
+                  <div
+                    key={p.Driver}
+                    className={`table-row rise-in ${finishPos <= 3 ? 'podium' : ''}`}
+                    style={{ animationDelay: `${Math.min(i * 0.035, 0.7)}s` }}
+                  >
                     <span className="col-pos">P{finishPos}</span>
                     <span className="col-driver">{p.Driver}</span>
                     <span className="col-name">{p.DriverFullName}</span>
@@ -122,7 +129,11 @@ const PredictionsView = ({ apiBaseUrl, year, events }) => {
                       <DeltaIcon size={14} />
                       {delta !== 0 && Math.abs(delta)}
                     </span>
-                    <span className="col-form">{p.RecentForm?.toFixed(1) ?? '—'}</span>
+                    <span className="col-form">
+                      {p.RecentForm != null
+                        ? <CountUp to={Number(p.RecentForm.toFixed(1))} duration={1.1} className="cu-form" />
+                        : '—'}
+                    </span>
                   </div>
                 );
               })}
@@ -137,6 +148,10 @@ const PredictionsView = ({ apiBaseUrl, year, events }) => {
           height: 100%;
           padding: 1.5rem;
           overflow: hidden;
+        }
+
+        .predictions-view.light-panel {
+          padding: 1.5rem;
         }
 
         .predictions-layout {
@@ -360,7 +375,7 @@ const PredictionsView = ({ apiBaseUrl, year, events }) => {
         .col-delta.loss { color: var(--accent-red); }
         .col-delta.flat { color: var(--text-secondary); }
       `}</style>
-    </div>
+    </SpotlightCard>
   );
 };
 

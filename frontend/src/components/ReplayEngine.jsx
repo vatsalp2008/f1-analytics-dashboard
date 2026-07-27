@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Pause, Play, RotateCcw, ChevronLeft, FastForward, Rewind, Info, Wind, Thermometer, Droplets, CloudRain } from 'lucide-react';
 import { flagFromCountryCode, formatRaceDate } from '../utils/format';
+import Aurora from '../reactbits/Aurora/Aurora';
+import ShinyText from '../reactbits/ShinyText/ShinyText';
+import CountUp from '../reactbits/CountUp/CountUp';
 
 const ReplayEngine = ({ data, onBack }) => {
     // Defensive check for data
@@ -130,15 +133,18 @@ const ReplayEngine = ({ data, onBack }) => {
 
     return (
         <div className="replay-container">
+            <div className="replay-aurora" aria-hidden="true">
+                <Aurora colorStops={["#e10600", "#3a0a0a", "#00a78a"]} amplitude={0.9} blend={0.5} speed={0.6} />
+            </div>
             <header className="top-bar">
                 <div className="race-info">
-                    <div className="lap-counter">Lap: {firstDriver?.lap || 0}/{total_laps}</div>
+                    <div className="lap-counter">Lap: <CountUp to={firstDriver?.lap || 0} duration={0.6} className="cu-lap" />/{total_laps}</div>
                     <div className="race-timer">Race Time: {formatClock(currentTime)} (x{playbackSpeed.toFixed(1)})</div>
                 </div>
                 <div className="race-title">
                     <span className="race-flag" aria-hidden="true">{flagFromCountryCode(country_code)}</span>
                     <div className="race-title-text">
-                        <div className="race-name">{event_name || 'Race'}</div>
+                        <ShinyText text={event_name || 'Race'} className="race-name" speed={3} color="#e7e7e7" shineColor="#ff5b5b" spread={100} />
                         {date && <div className="race-date">{formatRaceDate(date)}</div>}
                     </div>
                 </div>
@@ -227,7 +233,10 @@ const ReplayEngine = ({ data, onBack }) => {
             </footer>
 
             <style jsx>{`
-                .replay-container { width: 100vw; height: 100vh; background: #000; color: #fff; display: flex; flex-direction: column; padding: 20px; overflow: hidden; font-family: 'Inter', sans-serif; }
+                .replay-container { position: relative; width: 100vw; height: 100vh; background: #000; color: #fff; display: flex; flex-direction: column; padding: 20px; overflow: hidden; font-family: 'Inter', sans-serif; }
+                .replay-aurora { position: absolute; inset: 0; z-index: 0; opacity: 0.28; pointer-events: none; -webkit-mask-image: radial-gradient(120% 80% at 50% 0%, #000 30%, transparent 75%); mask-image: radial-gradient(120% 80% at 50% 0%, #000 30%, transparent 75%); }
+                .replay-container > .top-bar, .replay-container > .main-viewport, .replay-container > .bottom-bar { position: relative; z-index: 1; }
+                .race-name { font-size: 1.05rem; font-weight: 700; letter-spacing: 0.03em; }
                 .top-bar { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; gap: 16px; }
                 .lap-counter { font-size: 1.5rem; font-weight: 800; }
                 .race-timer { color: #888; font-size: 0.9rem; margin-top: 4px; }

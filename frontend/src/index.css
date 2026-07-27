@@ -18,6 +18,10 @@
   padding: 0;
 }
 
+html, body, #root {
+  height: 100%;
+}
+
 body {
   background-color: var(--bg-color);
   color: var(--text-primary);
@@ -75,4 +79,32 @@ button {
 
 .animate-fade-in {
   animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* Staggered list entrance shared by the calendar / leaderboard rows */
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.rise-in {
+  opacity: 0;
+  animation: riseIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* --- ReactBits: re-skin SpotlightCard as a light glass panel --- */
+.card-spotlight.light-panel {
+  background-color: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 0;
+  color: var(--text-primary);
+  box-shadow: 0 1px 3px rgba(11, 14, 20, 0.05), 0 12px 32px rgba(11, 14, 20, 0.06);
+  backdrop-filter: blur(10px);
+  --spotlight-color: rgba(225, 6, 0, 0.14);
+}
+
+.card-spotlight.light-panel:hover::before,
+.card-spotlight.light-panel:focus-within::before {
+  opacity: 1;
 }
