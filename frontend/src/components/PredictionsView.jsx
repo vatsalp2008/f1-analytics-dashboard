@@ -4,6 +4,7 @@ import { Loader2, ChevronRight, TrendingUp, TrendingDown, Minus } from 'lucide-r
 import { flagFromCountryCode, formatRaceDate } from '../utils/format';
 import SpotlightCard from '../reactbits/SpotlightCard/SpotlightCard';
 import CountUp from '../reactbits/CountUp/CountUp';
+import SkeletonRow from './SkeletonRow';
 
 const PredictionsView = ({ apiBaseUrl, year, events }) => {
   const [selectedRound, setSelectedRound] = useState(null);
@@ -89,9 +90,19 @@ const PredictionsView = ({ apiBaseUrl, year, events }) => {
           )}
 
           {loading && (
-            <div className="loader-container">
-              <Loader2 className="spinner" />
-              <p className="loading-text">Training model… (first request ~10–30s)</p>
+            <div className="predictions-table">
+              <div className="table-header">
+                <span className="col-pos">Pos</span>
+                <span className="col-driver">Driver</span>
+                <span className="col-name">Name</span>
+                <span className="col-grid">Grid</span>
+                <span className="col-delta">Δ</span>
+                <span className="col-form">Form</span>
+              </div>
+              {Array.from({ length: 8 }).map((_, i) => (
+                <SkeletonRow key={i} />
+              ))}
+              <p className="loading-text" style={{ marginTop: '1rem', textAlign: 'center' }}>Training model… (first request ~10–30s)</p>
             </div>
           )}
 
