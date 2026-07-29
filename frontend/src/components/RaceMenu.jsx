@@ -4,6 +4,19 @@ import { flagFromCountryCode, formatRaceDate } from '../utils/format';
 import SpotlightCard from '../reactbits/SpotlightCard/SpotlightCard';
 import StarBorder from '../reactbits/StarBorder/StarBorder';
 
+/**
+ * RaceMenu — season/race/session picker for the replay engine.
+ * @param {number} year - Currently selected season (e.g., 2025)
+ * @param {function} setYear - Update season
+ * @param {Array} events - List of races for the season
+ * @param {number|null} selectedEvent - Currently selected race round number
+ * @param {function} setSelectedEvent - Update selected race
+ * @param {string} sessionType - Session type: 'R' (race), 'Q' (qualifying), 'S' (sprint)
+ * @param {function} setSessionType - Update session type
+ * @param {function} onLaunch - Callback to load telemetry and launch replay
+ * @param {boolean} loading - Telemetry fetch in progress
+ * @param {string|null} error - Error message if fetch failed
+ */
 const RaceMenu = ({
     year, setYear, events, selectedEvent, setSelectedEvent,
     sessionType, setSessionType, onLaunch, loading, error

@@ -6,6 +6,13 @@ import SpotlightCard from '../reactbits/SpotlightCard/SpotlightCard';
 import CountUp from '../reactbits/CountUp/CountUp';
 import SkeletonRow from './SkeletonRow';
 
+/**
+ * PredictionsView — displays AI-predicted race finishing order.
+ * Fetches predictions from the backend ML model for a selected race.
+ * @param {string} apiBaseUrl - Base URL for API calls (e.g., http://localhost:8000/api)
+ * @param {number} year - Currently selected season
+ * @param {Array} events - List of races for the season
+ */
 const PredictionsView = ({ apiBaseUrl, year, events }) => {
   const [selectedRound, setSelectedRound] = useState(null);
   const [prediction, setPrediction] = useState(null);

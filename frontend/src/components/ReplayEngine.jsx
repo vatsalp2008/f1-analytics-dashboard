@@ -7,6 +7,20 @@ import CountUp from '../reactbits/CountUp/CountUp';
 // Decorative WebGL backdrop (ogl) — code-split to keep it out of the main bundle.
 const Aurora = lazy(() => import('../reactbits/Aurora/Aurora'));
 
+/**
+ * ReplayEngine — canvas-based F1 race telemetry replay with interactive driver tracking.
+ * Renders a track map, driver positions, telemetry, leaderboard, and playback controls.
+ * @param {Object} data - Telemetry frame data from API
+ * @param {Array} data.frames - Array of timestamped frames with driver positions/telemetry
+ * @param {Object} data.driver_colors - Mapping of driver codes to color hex values
+ * @param {number} data.total_laps - Total laps in the session
+ * @param {string} data.event_name - Name of the race (e.g., "Bahrain Grand Prix")
+ * @param {string} data.country_code - ISO 3166-1 alpha-2 code for flag emoji
+ * @param {string} data.date - Race date as YYYY-MM-DD
+ * @param {Array} data.track_map - Array of {x, y} points defining the circuit layout
+ * @param {Object} data.weather - Weather conditions {temperature, humidity, wind_speed, rain_probability}
+ * @param {function} onBack - Callback to exit replay and return to menu
+ */
 const ReplayEngine = ({ data, onBack }) => {
     // Defensive check for data
     if (!data || !data.frames || data.frames.length === 0) {
