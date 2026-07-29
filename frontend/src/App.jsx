@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import axios from 'axios';
 import RaceMenu from './components/RaceMenu';
 import ReplayEngine from './components/ReplayEngine';
 import PredictionsView from './components/PredictionsView';
-import Particles from './reactbits/Particles/Particles';
 import SplitText from './reactbits/SplitText/SplitText';
 import ShinyText from './reactbits/ShinyText/ShinyText';
 import GooeyNav from './reactbits/GooeyNav/GooeyNav';
 import './index.css';
+
+// Decorative WebGL background (ogl) — code-split so it doesn't bloat the main bundle.
+const Particles = lazy(() => import('./reactbits/Particles/Particles'));
 
 const API_BASE_URL = 'http://localhost:8000/api';
 
@@ -68,18 +70,20 @@ function App() {
     <div className="app-container">
       <header className="main-header">
         <div className="header-bg">
-          <Particles
-            className="header-particles"
-            particleColors={['#e10600', '#ff4d4d', '#ffffff']}
-            particleCount={160}
-            particleSpread={12}
-            speed={0.08}
-            particleBaseSize={70}
-            alphaParticles
-            moveParticlesOnHover
-            particleHoverFactor={1.5}
-            disableRotation={false}
-          />
+          <Suspense fallback={null}>
+            <Particles
+              className="header-particles"
+              particleColors={['#e10600', '#ff4d4d', '#ffffff']}
+              particleCount={160}
+              particleSpread={12}
+              speed={0.08}
+              particleBaseSize={70}
+              alphaParticles
+              moveParticlesOnHover
+              particleHoverFactor={1.5}
+              disableRotation={false}
+            />
+          </Suspense>
         </div>
 
         <div className="header-inner">
