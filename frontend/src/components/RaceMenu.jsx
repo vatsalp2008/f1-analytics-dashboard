@@ -103,7 +103,7 @@ const RaceMenu = ({
                         </StarBorder>
                     </div>
 
-                    {error && <div className="error-msg"><Info size={14} /> {error}</div>}
+                    {error && <div className="error-msg"><Info size={14} /> ⚠️ {error}</div>}
                 </div>
             </div>
 

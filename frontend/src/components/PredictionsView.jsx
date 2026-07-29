@@ -81,10 +81,12 @@ const PredictionsView = ({ apiBaseUrl, year, events }) => {
 
           {!selectedRound && !loading && (
             <div className="placeholder">
-              <p>Select a race to view its predicted finishing order.</p>
+              <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>📊</div>
+              <p style={{ fontWeight: 600 }}>No race selected</p>
+              <p>Pick a Grand Prix from the calendar on the left to see predicted finishing order.</p>
               <p className="caveat">
-                First request takes ~10–30s while the model trains.
-                Subsequent requests are instant (cached).
+                💡 <strong>First request:</strong> ~10–30s (model training)<br/>
+                ⚡ <strong>Next requests:</strong> instant (cached)
               </p>
             </div>
           )}
@@ -107,7 +109,10 @@ const PredictionsView = ({ apiBaseUrl, year, events }) => {
           )}
 
           {error && (
-            <div className="error-msg">{error}</div>
+            <div className="error-msg">
+              <span style={{ marginRight: '0.5rem' }}>⚠️</span>
+              {error}
+            </div>
           )}
 
           {prediction && !loading && (
