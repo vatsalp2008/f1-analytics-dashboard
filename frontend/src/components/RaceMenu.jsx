@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, Play, Loader2, ChevronRight, Info } from 'lucide-react';
+import { Play, Loader2, ChevronRight, Info } from 'lucide-react';
 import { flagFromCountryCode, formatRaceDate } from '../utils/format';
 import SpotlightCard from '../reactbits/SpotlightCard/SpotlightCard';
 import StarBorder from '../reactbits/StarBorder/StarBorder';

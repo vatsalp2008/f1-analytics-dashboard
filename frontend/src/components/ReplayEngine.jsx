@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { Pause, Play, RotateCcw, ChevronLeft, FastForward, Rewind, Info, Wind, Thermometer, Droplets, CloudRain } from 'lucide-react';
+import { Pause, Play, RotateCcw, FastForward, Rewind, Info, Wind, Thermometer, Droplets, CloudRain } from 'lucide-react';
 import { flagFromCountryCode, formatRaceDate } from '../utils/format';
 import Aurora from '../reactbits/Aurora/Aurora';
 import ShinyText from '../reactbits/ShinyText/ShinyText';
