@@ -92,6 +92,18 @@ button {
   animation: riseIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+/* Respect users who prefer reduced motion: skip entrance animations */
+@media (prefers-reduced-motion: reduce) {
+  .rise-in,
+  .animate-fade-in {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+  }
+  .rise-in {
+    opacity: 1;
+  }
+}
+
 /* --- ReactBits: re-skin SpotlightCard as a light glass panel --- */
 .card-spotlight.light-panel {
   background-color: rgba(255, 255, 255, 0.92);
