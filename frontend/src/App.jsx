@@ -1,5 +1,6 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import axios from 'axios';
+import ErrorBoundary from './components/ErrorBoundary';
 import RaceMenu from './components/RaceMenu';
 import ReplayEngine from './components/ReplayEngine';
 import PredictionsView from './components/PredictionsView';
@@ -120,7 +121,8 @@ function App() {
       </header>
 
       <main className="main-content">
-        {view === 'replay' ? (
+        <ErrorBoundary>
+          {view === 'replay' ? (
           <RaceMenu
             year={year}
             setYear={setYear}
@@ -140,6 +142,7 @@ function App() {
             events={events}
           />
         )}
+        </ErrorBoundary>
       </main>
 
       <footer className="main-footer">
