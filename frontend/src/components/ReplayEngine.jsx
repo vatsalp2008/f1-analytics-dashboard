@@ -196,16 +196,23 @@ const ReplayEngine = ({ data, onBack }) => {
                     <canvas ref={canvasRef} width={1000} height={700} />
                 </div>
 
-                <aside className="right-panel glass">
+                <aside className="right-panel glass" role="region" aria-label="Race leaderboard">
                     <h3>Leaderboard</h3>
-                    <div className="lb-list">
+                    <div className="lb-list" role="list">
                         {sortedDriversList.map(([code, d]) => (
-                            <div key={code} className={`lb-item ${selectedDrivers.includes(code) ? 'selected' : ''}`} onClick={() => toggleDriver(code)}>
+                            <button
+                              key={code}
+                              className={`lb-item ${selectedDrivers.includes(code) ? 'selected' : ''}`}
+                              onClick={() => toggleDriver(code)}
+                              role="listitem"
+                              aria-label={`P${d.position} ${code} ${selectedDrivers.includes(code) ? 'selected' : ''}`}
+                              aria-pressed={selectedDrivers.includes(code)}
+                            >
                                 <span className="pos">{d.position}.</span>
                                 <span className="code" style={{ color: driver_colors[code] }}>{code}</span>
-                                <div className="tyre-dot" style={{ backgroundColor: d.tyre === 1 ? '#ff1e1e' : d.tyre === 2 ? '#fff000' : '#fff' }} />
-                                {selectedDrivers.includes(code) && <Info size={12} className="info-icon" />}
-                            </div>
+                                <div className="tyre-dot" style={{ backgroundColor: d.tyre === 1 ? '#ff1e1e' : d.tyre === 2 ? '#fff000' : '#fff' }} aria-hidden="true" />
+                                {selectedDrivers.includes(code) && <Info size={12} className="info-icon" aria-hidden="true" />}
+                            </button>
                         ))}
                     </div>
                 </aside>
@@ -274,7 +281,7 @@ const ReplayEngine = ({ data, onBack }) => {
                 .bar.brake { background: #ff4757; }
                 .bar-labels { position: absolute; bottom: -16px; left: 0; width: 100%; display: flex; justify-content: space-around; font-size: 0.55rem; color: #444; }
                 .lb-list { flex: 1; overflow-y: auto; margin-top: 10px; }
-                .lb-item { display: flex; align-items: center; padding: 6px 8px; font-size: 0.85rem; cursor: pointer; border-radius: 4px; }
+                .lb-item { display: flex; align-items: center; padding: 6px 8px; font-size: 0.85rem; cursor: pointer; border-radius: 4px; background: none; border: none; color: inherit; font-family: inherit; text-align: left; width: 100%; }
                 .lb-item:hover { background: rgba(255,255,255,0.05); }
                 .lb-item.selected { background: rgba(225, 6, 0, 0.2); border: 1px solid rgba(225, 6, 0, 0.3); }
                 .lb-item .pos { width: 22px; opacity: 0.4; font-weight: 700; }
