@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef, useMemo, lazy, Suspense } from 'react';
 import { Pause, Play, RotateCcw, FastForward, Rewind, Info, Wind, Thermometer, Droplets, CloudRain } from 'lucide-react';
 import { flagFromCountryCode, formatRaceDate } from '../utils/format';
-import Aurora from '../reactbits/Aurora/Aurora';
 import ShinyText from '../reactbits/ShinyText/ShinyText';
 import CountUp from '../reactbits/CountUp/CountUp';
+
+// Decorative WebGL backdrop (ogl) — code-split to keep it out of the main bundle.
+const Aurora = lazy(() => import('../reactbits/Aurora/Aurora'));
 
 const ReplayEngine = ({ data, onBack }) => {
     // Defensive check for data
@@ -134,7 +136,9 @@ const ReplayEngine = ({ data, onBack }) => {
     return (
         <div className="replay-container">
             <div className="replay-aurora" aria-hidden="true">
-                <Aurora colorStops={["#e10600", "#3a0a0a", "#00a78a"]} amplitude={0.9} blend={0.5} speed={0.6} />
+                <Suspense fallback={null}>
+                    <Aurora colorStops={["#e10600", "#3a0a0a", "#00a78a"]} amplitude={0.9} blend={0.5} speed={0.6} />
+                </Suspense>
             </div>
             <header className="top-bar">
                 <div className="race-info">
