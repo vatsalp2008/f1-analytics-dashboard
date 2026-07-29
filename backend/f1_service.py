@@ -9,6 +9,7 @@ import pickle
 import gzip
 from datetime import timedelta
 from typing import Dict, List, Any
+from utils.weather import fetch_race_day_weather
 
 # FPS for the replay
 FPS = 25
@@ -165,13 +166,26 @@ def get_race_telemetry_json(year: int, round_number: int, session_type: str = 'R
     event_name = session.event['EventName']
     ev_date = session.event.get('EventDate')
     date_str = ev_date.strftime("%Y-%m-%d") if pd.notna(ev_date) else None
+
+    # Fetch live weather for the race circuit
+    weather = {"temperature": 20, "humidity": 60, "rain_probability": 0.1, "wind_speed": 4, "description": "data unavailable"}
+    try:
+        circuit = session.event.get('Circuit', {})
+        lat = circuit.get('Location', {}).get('Latitude')
+        lon = circuit.get('Location', {}).get('Longitude')
+        if lat and lon:
+            weather = fetch_race_day_weather(lat, lon, date_str)
+    except Exception as e:
+        print(f"Weather fetch error: {e}")
+
     result = {
         "frames": frames, "driver_colors": get_driver_colors(session),
         "total_laps": int(max_lap_number),
         "event_name": event_name,
         "country_code": COUNTRY_CODES.get(event_name, ""),
         "date": date_str,
-        "track_map": track_map
+        "track_map": track_map,
+        "weather": weather
     }
 
     # Save to processed cache

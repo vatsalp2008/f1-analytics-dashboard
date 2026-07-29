@@ -31,7 +31,7 @@ const ReplayEngine = ({ data, onBack }) => {
         );
     }
 
-    const { frames, driver_colors, total_laps, event_name, country_code, date } = data;
+    const { frames, driver_colors, total_laps, event_name, country_code, date, weather } = data;
 
     // State
     const [isPlaying, setIsPlaying] = useState(true);
@@ -160,11 +160,11 @@ const ReplayEngine = ({ data, onBack }) => {
                     <section className="weather-card glass">
                         <h4>Weather</h4>
                         <div className="weather-grid">
-                            <div className="w-item"><Thermometer size={14} /> Track: 23.3°C</div>
-                            <div className="w-item"><Thermometer size={14} /> Air: 18.5°C</div>
-                            <div className="w-item"><Droplets size={14} /> Humidity: 73%</div>
-                            <div className="w-item"><Wind size={14} /> Wind: 1.0 km/h S</div>
-                            <div className="w-item"><CloudRain size={14} /> Rain: DRY</div>
+                            <div className="w-item"><Thermometer size={14} /> {weather ? `${weather.temperature?.toFixed(1) || '—'}°C` : '—°C'}</div>
+                            <div className="w-item"><Droplets size={14} /> {weather ? `${(weather.humidity || 0).toFixed(0)}%` : '—%'}</div>
+                            <div className="w-item"><Wind size={14} /> {weather ? `${(weather.wind_speed || 0).toFixed(1)} km/h` : '—'}</div>
+                            <div className="w-item"><CloudRain size={14} /> {weather ? `${Math.round((weather.rain_probability || 0) * 100)}%` : '—%'}</div>
+                            <div className="w-item" style={{fontSize: '0.75rem', color: '#888'}}>{weather?.description || 'loading...'}</div>
                         </div>
                     </section>
                     <section className="telemetry-stack">
