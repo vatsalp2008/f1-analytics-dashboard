@@ -7,6 +7,7 @@ import PredictionsView from './components/PredictionsView';
 import SplitText from './reactbits/SplitText/SplitText';
 import ShinyText from './reactbits/ShinyText/ShinyText';
 import GooeyNav from './reactbits/GooeyNav/GooeyNav';
+import { validateEvents, validateTelemetry, validatePredictions } from './utils/api-validation';
 import './index.css';
 
 // Decorative WebGL background (ogl) — code-split so it doesn't bloat the main bundle.
@@ -37,10 +38,11 @@ function App() {
     setLoading(true);
     try {
       const response = await axios.get(`${API_BASE_URL}/events/${y}`);
-      setEvents(response.data);
+      const validated = validateEvents(response.data);
+      setEvents(validated);
       setLoading(false);
     } catch (err) {
-      setError('Failed to fetch events');
+      setError(err.message || 'Failed to fetch events');
       setLoading(false);
     }
   };
@@ -50,10 +52,11 @@ function App() {
     setError(null);
     try {
       const response = await axios.get(`${API_BASE_URL}/telemetry/${year}/${round}/${sessionType}`);
-      setTelemetry(response.data);
+      const validated = validateTelemetry(response.data);
+      setTelemetry(validated);
       setLoading(false);
     } catch (err) {
-      setError(err.response?.data?.detail || 'Failed to fetch telemetry data');
+      setError(err.message || err.response?.data?.detail || 'Failed to fetch telemetry data');
       setLoading(false);
     }
   };

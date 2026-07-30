@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Loader2, ChevronRight, TrendingUp, TrendingDown, Minus } from 'lucide-react';
 import { flagFromCountryCode, formatRaceDate } from '../utils/format';
+import { validatePredictions } from '../utils/api-validation';
 import SpotlightCard from '../reactbits/SpotlightCard/SpotlightCard';
 import CountUp from '../reactbits/CountUp/CountUp';
 import SkeletonRow from './SkeletonRow';
@@ -26,9 +27,10 @@ const PredictionsView = ({ apiBaseUrl, year, events }) => {
     setLoading(true);
     try {
       const res = await axios.get(`${apiBaseUrl}/predictions/${year}/${round}`);
-      setPrediction(res.data);
+      const validated = validatePredictions(res.data);
+      setPrediction(validated);
     } catch (err) {
-      setError(err.response?.data?.detail || 'Failed to fetch prediction');
+      setError(err.message || err.response?.data?.detail || 'Failed to fetch prediction');
     } finally {
       setLoading(false);
     }
