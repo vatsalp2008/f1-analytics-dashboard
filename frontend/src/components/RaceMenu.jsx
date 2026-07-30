@@ -21,7 +21,11 @@ const RaceMenu = ({
     year, setYear, events, selectedEvent, setSelectedEvent,
     sessionType, setSessionType, onLaunch, loading, error
 }) => {
+    const [searchTerm, setSearchTerm] = React.useState('');
     const years = Array.from({ length: 2025 - 2018 + 1 }, (_, i) => 2018 + i).reverse();
+    const filteredEvents = events.filter(e =>
+        e.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     const sessionTypes = [
         { id: 'R', label: 'Race' },
@@ -51,12 +55,33 @@ const RaceMenu = ({
 
                 {/* Events Selector */}
                 <div className="section-column events-column">
-                    <h3>Grand Prix Calendar</h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                        <h3>Grand Prix Calendar</h3>
+                        <input
+                            type="text"
+                            placeholder="Search races..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            style={{
+                                padding: '0.5rem 0.75rem',
+                                fontSize: '0.875rem',
+                                border: `1px solid var(--border-color)`,
+                                borderRadius: '6px',
+                                background: 'var(--card-bg)',
+                                color: 'var(--text-primary)',
+                                fontFamily: 'inherit'
+                            }}
+                        />
+                    </div>
                     <div className="scroll-list">
                         {loading && !events.length ? (
                             <div className="loader-container"><Loader2 className="spinner" /></div>
+                        ) : filteredEvents.length === 0 ? (
+                            <div style={{ padding: '1rem', textAlign: 'center', color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
+                                No races match "{searchTerm}"
+                            </div>
                         ) : (
-                            events.map((event, i) => (
+                            filteredEvents.map((event, i) => (
                                 <button
                                     key={event.round}
                                     className={`menu-item event-item rise-in ${selectedEvent === event.round ? 'active' : ''}`}
