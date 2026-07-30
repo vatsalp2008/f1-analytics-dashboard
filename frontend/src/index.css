@@ -10,9 +10,26 @@
   --elevated-tint: rgba(11, 14, 20, 0.04);
   --elevated-tint-strong: rgba(11, 14, 20, 0.08);
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  /* Transition duration for interactive elements */
   --transition-fast: 0.15s ease;
   --transition-normal: 0.3s ease;
+}
+
+/* Dark mode respects system preference */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #0f1419;
+    --card-bg: #1a1e26;
+    --text-primary: #e8ecf1;
+    --text-secondary: #9da3b0;
+    --border-color: #2a3038;
+    --elevated-tint: rgba(232, 236, 241, 0.08);
+    --elevated-tint-strong: rgba(232, 236, 241, 0.12);
+  }
+
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+  }
 }
 
 * {
