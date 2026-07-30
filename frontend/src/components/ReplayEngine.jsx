@@ -80,6 +80,18 @@ const ReplayEngine = ({ data, onBack }) => {
         });
     };
 
+    // Get lap range for the current frame
+    const getLapStats = () => {
+        if (!currentFrame?.drivers || Object.keys(currentFrame.drivers).length === 0) {
+            return { highestLap: 0, leaderLap: 0 };
+        }
+        const laps = Object.values(currentFrame.drivers).map(d => d.lap);
+        return {
+            highestLap: Math.max(...laps),
+            leaderLap: sortedDriversList[0]?.[1]?.lap || 0
+        };
+    };
+
     const animate = time => {
         if (lastTimeRef.current !== undefined) {
             const deltaTime = (time - lastTimeRef.current) / 1000;
@@ -209,6 +221,16 @@ const ReplayEngine = ({ data, onBack }) => {
                             <div className="w-item"><Wind size={14} /> {weather ? `${(weather.wind_speed || 0).toFixed(1)} km/h` : '—'}</div>
                             <div className="w-item"><CloudRain size={14} /> {weather ? `${Math.round((weather.rain_probability || 0) * 100)}%` : '—%'}</div>
                             <div className="w-item" style={{fontSize: '0.75rem', color: '#888'}}>{weather?.description || 'loading...'}</div>
+                        </div>
+                    </section>
+                    <section className="weather-card glass" style={{padding: '12px'}}>
+                        <h4>Lap Progress</h4>
+                        <div style={{display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '0.8rem'}}>
+                            <div>Leader: Lap <strong>{getLapStats().leaderLap}/{total_laps}</strong></div>
+                            <div style={{fontSize: '0.7rem', color: '#aaa'}}>Highest: Lap {getLapStats().highestLap}</div>
+                            <div style={{marginTop: '4px', height: '4px', background: '#222', borderRadius: '2px', overflow: 'hidden'}}>
+                                <div style={{height: '100%', background: '#e10600', width: `${(getLapStats().leaderLap / total_laps) * 100}%`, transition: 'width 0.2s'}}></div>
+                            </div>
                         </div>
                     </section>
                     <section className="telemetry-stack">
