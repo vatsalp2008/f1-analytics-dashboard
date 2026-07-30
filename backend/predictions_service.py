@@ -11,9 +11,21 @@ import io
 import json
 import pickle
 from pathlib import Path
+from typing import Any, Dict, TypedDict
 
 from utils.predictor import run_prediction
 from utils.race_registry import REGISTRY
+
+
+class PredictionResponse(TypedDict):
+    """Type definition for prediction API response."""
+    year: int
+    round: int
+    race_name: str
+    fastf1_name: str
+    model: str
+    has_sprint: bool
+    predictions: list[Dict[str, Any]]
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -24,7 +36,7 @@ def _cache_path(year: int, round_number: int) -> Path:
     return CACHE_DIR / f"{year}_R{round_number:02d}.pkl"
 
 
-def get_prediction(year: int, round_number: int) -> dict:
+def get_prediction(year: int, round_number: int) -> PredictionResponse:
     """Run (or load cached) prediction for one race, return JSON-safe dict."""
     if year != 2025:
         raise ValueError(f"Only 2025 is supported, got {year}")
@@ -51,7 +63,7 @@ def get_prediction(year: int, round_number: int) -> dict:
     # so the dict is fully serialisable.
     records = json.loads(df.to_json(orient="records"))
 
-    payload = {
+    payload: PredictionResponse = {
         "year": year,
         "round": round_number,
         "race_name": config.race_name,
@@ -60,6 +72,11 @@ def get_prediction(year: int, round_number: int) -> dict:
         "has_sprint": config.has_sprint,
         "predictions": records,
     }
+
+    # Validate required fields exist
+    required_keys = {"year", "round", "race_name", "fastf1_name", "model", "has_sprint", "predictions"}
+    if not required_keys.issubset(payload.keys()):
+        raise ValueError(f"Payload missing required keys: {required_keys - set(payload.keys())}")
 
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
     with cache.open("wb") as f:
