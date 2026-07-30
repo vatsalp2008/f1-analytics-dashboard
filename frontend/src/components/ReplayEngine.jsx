@@ -187,6 +187,35 @@ const ReplayEngine = ({ data, onBack }) => {
         return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
     };
 
+    const exportCSV = () => {
+        const rows = [['Time', 'Driver', 'Position', 'Speed', 'Lap', 'Gear', 'DRS', 'Tyre']];
+        frames.forEach((frame, idx) => {
+            sortedDriversList.forEach(([code, _]) => {
+                const d = frame.drivers[code];
+                if (d) {
+                    rows.push([
+                        frame.t.toFixed(2),
+                        code,
+                        d.position,
+                        Math.round(d.speed),
+                        d.lap,
+                        d.gear,
+                        d.drs >= 10 ? 'ON' : 'OFF',
+                        d.tyre
+                    ]);
+                }
+            });
+        });
+        const csv = rows.map(r => r.join(',')).join('\n');
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${event_name.replace(/\s+/g, '_')}_telemetry.csv`;
+        a.click();
+        URL.revokeObjectURL(url);
+    };
+
     const firstDriver = currentFrame?.drivers ? Object.values(currentFrame.drivers)[0] : null;
 
     return (
@@ -306,6 +335,9 @@ const ReplayEngine = ({ data, onBack }) => {
                         <span className="speed-val">{playbackSpeed}x</span>
                         <input type="range" min="0.5" max="16" step="0.5" value={playbackSpeed} onChange={(e) => setPlaybackSpeed(parseFloat(e.target.value))} />
                     </div>
+                    <button onClick={exportCSV} style={{padding: '8px 12px', fontSize: '0.75rem', background: '#222', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer'}}>
+                        Export CSV
+                    </button>
                 </div>
             </footer>
 
