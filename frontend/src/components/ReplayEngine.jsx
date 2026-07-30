@@ -95,6 +95,36 @@ const ReplayEngine = ({ data, onBack }) => {
     };
 
     useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.target.tagName === 'INPUT') return; // Don't intercept in input fields
+            switch (e.key) {
+                case ' ':
+                    e.preventDefault();
+                    setIsPlaying(!isPlaying);
+                    break;
+                case 'ArrowRight':
+                    e.preventDefault();
+                    setCurrentTime(prev => Math.min(duration, prev + 5));
+                    break;
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    setCurrentTime(prev => Math.max(0, prev - 5));
+                    break;
+                case 'r':
+                case 'R':
+                    e.preventDefault();
+                    setCurrentTime(0);
+                    setIsPlaying(true);
+                    break;
+                default:
+                    break;
+            }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [isPlaying, duration]);
+
+    useEffect(() => {
         requestRef.current = requestAnimationFrame(animate);
         return () => cancelAnimationFrame(requestRef.current);
     }, [isPlaying, playbackSpeed, duration]);
@@ -232,7 +262,7 @@ const ReplayEngine = ({ data, onBack }) => {
                 </aside>
             </main>
 
-            <footer className="bottom-bar glass">
+            <footer className="bottom-bar glass" title="Keyboard: Space=Play/Pause, ←/→=Seek, R=Restart">
                 <div className="progress-section">
                     <div className="sector-bar">
                         <div className="sector s1" style={{ width: '30%', background: '#2ecc71' }}></div>
