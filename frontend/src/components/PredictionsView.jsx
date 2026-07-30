@@ -368,6 +368,8 @@ const PredictionsView = ({ apiBaseUrl, year, events }) => {
 
         .table-row.podium {
           background: rgba(225,6,0,0.06);
+          border-left: 4px solid var(--accent-red);
+          padding-left: calc(0.75rem - 4px);
         }
 
         .table-row:hover {
