@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import ClickSpark from './reactbits/ClickSpark/ClickSpark.jsx'
+import { trackPerformance } from './utils/performance'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -11,6 +12,9 @@ createRoot(document.getElementById('root')).render(
     </ClickSpark>
   </StrictMode>,
 )
+
+// Initialize performance monitoring
+trackPerformance();
 
 // Register service worker for offline support
 if ('serviceWorker' in navigator) {
