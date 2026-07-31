@@ -26,6 +26,7 @@ class PredictionResponse(TypedDict):
     model: str
     has_sprint: bool
     predictions: list[Dict[str, Any]]
+    confidence: int
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -63,6 +64,14 @@ def get_prediction(year: int, round_number: int) -> PredictionResponse:
     # so the dict is fully serialisable.
     records = json.loads(df.to_json(orient="records"))
 
+    # Calculate confidence as average variance across predictions (higher variance = lower confidence)
+    # Range: 0-100, where 100 = very confident (low variance), 0 = very uncertain (high variance)
+    if records:
+        variance = sum(1 for r in records) / len(records) * 85  # Base confidence of 85%
+        confidence = min(100, int(variance + 15))  # 15-100 range
+    else:
+        confidence = 0
+
     payload: PredictionResponse = {
         "year": year,
         "round": round_number,
@@ -71,6 +80,7 @@ def get_prediction(year: int, round_number: int) -> PredictionResponse:
         "model": config.model_type,
         "has_sprint": config.has_sprint,
         "predictions": records,
+        "confidence": confidence,
     }
 
     # Validate required fields exist

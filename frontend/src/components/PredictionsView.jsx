@@ -79,7 +79,9 @@ const PredictionsView = ({ apiBaseUrl, year, events }) => {
                     {prediction.race_name} — {prediction.model.toUpperCase()}
                   </h3>
                   {evt?.date && (
-                    <div className="results-date">{formatRaceDate(evt.date)}</div>
+                    <div className="results-date">
+                      {formatRaceDate(evt.date)} • Confidence: {prediction.confidence}%
+                    </div>
                   )}
                 </div>
               </div>
