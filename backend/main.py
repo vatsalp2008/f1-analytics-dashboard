@@ -2,6 +2,8 @@ from fastapi import FastAPI, HTTPException, Response
 from fastapi.middleware.cors import CORSMiddleware
 from backend import f1_service, predictions_service
 import uvicorn
+import hashlib
+import json
 
 app = FastAPI(title="F1 Race Replay API")
 
@@ -14,6 +16,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+def generate_etag(data: dict) -> str:
+    """Generate ETag from response data for cache validation."""
+    data_str = json.dumps(data, sort_keys=True, default=str)
+    return hashlib.md5(data_str.encode()).hexdigest()
+
 @app.get("/api/events/{year}")
 async def get_events(year: int, response: Response):
     """Get F1 race calendar for a given season."""
@@ -22,7 +29,9 @@ async def get_events(year: int, response: Response):
     # Cache for 1 hour — race calendars don't change frequently
     response.headers["Cache-Control"] = "public, max-age=3600"
     try:
-        return f1_service.get_events(year)
+        data = f1_service.get_events(year)
+        response.headers["ETag"] = generate_etag({"year": year, "events": len(data)})
+        return data
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
