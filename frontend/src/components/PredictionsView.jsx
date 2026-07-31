@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Loader2, ChevronRight, TrendingUp, TrendingDown, Minus } from 'lucide-react';
 import { flagFromCountryCode, formatRaceDate } from '../utils/format';
+import { formatConfidence } from '../utils/numbers';
 import { validatePredictions } from '../utils/api-validation';
 import SpotlightCard from '../reactbits/SpotlightCard/SpotlightCard';
 import CountUp from '../reactbits/CountUp/CountUp';
@@ -80,7 +81,7 @@ const PredictionsView = ({ apiBaseUrl, year, events }) => {
                   </h3>
                   {evt?.date && (
                     <div className="results-date">
-                      {formatRaceDate(evt.date)} • Confidence: {prediction.confidence}%
+                      {formatRaceDate(evt.date)} • {formatConfidence(prediction.confidence)}
                     </div>
                   )}
                 </div>
