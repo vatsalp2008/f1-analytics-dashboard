@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo, lazy, Suspense } from 'react';
 import { Pause, Play, RotateCcw, FastForward, Rewind, Info, Wind, Thermometer, Droplets, CloudRain } from 'lucide-react';
 import { flagFromCountryCode, formatRaceDate } from '../utils/format';
+import { sanitizeDriverName } from '../utils/input-validation';
 import SpeedChart from './SpeedChart';
 import ShinyText from '../reactbits/ShinyText/ShinyText';
 import CountUp from '../reactbits/CountUp/CountUp';
