@@ -22,9 +22,16 @@ const RaceMenu = ({
     sessionType, setSessionType, onLaunch, loading, error
 }) => {
     const [searchTerm, setSearchTerm] = React.useState('');
+    const [debouncedSearch, setDebouncedSearch] = React.useState('');
     const years = Array.from({ length: 2025 - 2018 + 1 }, (_, i) => 2018 + i).reverse();
+
+    React.useEffect(() => {
+        const timer = setTimeout(() => setDebouncedSearch(searchTerm), 300);
+        return () => clearTimeout(timer);
+    }, [searchTerm]);
+
     const filteredEvents = events.filter(e =>
-        e.name.toLowerCase().includes(searchTerm.toLowerCase())
+        e.name.toLowerCase().includes(debouncedSearch.toLowerCase())
     );
 
     const sessionTypes = [
@@ -76,9 +83,9 @@ const RaceMenu = ({
                     <div className="scroll-list">
                         {loading && !events.length ? (
                             <div className="loader-container"><Loader2 className="spinner" /></div>
-                        ) : filteredEvents.length === 0 ? (
+                        ) : filteredEvents.length === 0 && debouncedSearch ? (
                             <div style={{ padding: '1rem', textAlign: 'center', color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
-                                No races match "{searchTerm}"
+                                No races match "{debouncedSearch}"
                             </div>
                         ) : (
                             filteredEvents.map((event, i) => (
