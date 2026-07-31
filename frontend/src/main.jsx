@@ -4,6 +4,10 @@ import './index.css'
 import App from './App.jsx'
 import ClickSpark from './reactbits/ClickSpark/ClickSpark.jsx'
 import { trackPerformance } from './utils/performance'
+import { initializeTheme } from './utils/theme'
+
+// Initialize theme on app load
+initializeTheme();
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
