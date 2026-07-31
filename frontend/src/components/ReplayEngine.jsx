@@ -301,7 +301,7 @@ const ReplayEngine = ({ data, onBack }) => {
                 <aside className="right-panel glass" role="region" aria-label="Race leaderboard">
                     <h3>Leaderboard</h3>
                     <div className="lb-list" role="list">
-                        {sortedDriversList.map(([code, d]) => (
+                        {sortedDriversList.slice(0, 10).map(([code, d]) => (
                             <button
                               key={code}
                               className={`lb-item ${selectedDrivers.includes(code) ? 'selected' : ''}`}
@@ -316,6 +316,11 @@ const ReplayEngine = ({ data, onBack }) => {
                                 {selectedDrivers.includes(code) && <Info size={12} className="info-icon" aria-hidden="true" />}
                             </button>
                         ))}
+                        {sortedDriversList.length > 10 && (
+                            <div style={{fontSize: '0.7rem', color: '#666', padding: '6px 8px', textAlign: 'center'}}>
+                                +{sortedDriversList.length - 10} more drivers
+                            </div>
+                        )}
                     </div>
                 </aside>
             </main>
