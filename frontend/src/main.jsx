@@ -11,3 +11,12 @@ createRoot(document.getElementById('root')).render(
     </ClickSpark>
   </StrictMode>,
 )
+
+// Register service worker for offline support
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(reg => console.log('Service Worker registered'))
+      .catch(err => console.warn('Service Worker registration failed:', err));
+  });
+}
