@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo, lazy, Suspense } from 'react';
 import { Pause, Play, RotateCcw, FastForward, Rewind, Info, Wind, Thermometer, Droplets, CloudRain } from 'lucide-react';
 import { flagFromCountryCode, formatRaceDate } from '../utils/format';
+import SpeedChart from './SpeedChart';
 import ShinyText from '../reactbits/ShinyText/ShinyText';
 import CountUp from '../reactbits/CountUp/CountUp';
 
@@ -262,6 +263,12 @@ const ReplayEngine = ({ data, onBack }) => {
                             </div>
                         </div>
                     </section>
+                    <SpeedChart
+                        frames={frames}
+                        currentTime={currentTime}
+                        leaderCode={sortedDriversList[0]?.[0]}
+                        driverColors={driver_colors}
+                    />
                     <section className="telemetry-stack">
                         {selectedDrivers.map(code => {
                             const d = currentFrame?.drivers?.[code];
