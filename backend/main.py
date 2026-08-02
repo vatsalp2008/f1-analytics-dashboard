@@ -74,5 +74,17 @@ async def get_predictions(year: int, round_number: int, response: Response):
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.get("/api/driver/{driver_code}")
+async def get_driver_stats(driver_code: str, response: Response):
+    """Get driver career statistics (wins, podiums, poles, championships)."""
+    response.headers["Cache-Control"] = "public, max-age=604800"
+    try:
+        driver = f1_service.get_driver_stats(driver_code.upper())
+        if driver is None:
+            raise HTTPException(status_code=404, detail=f"Driver {driver_code} not found")
+        return driver
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)

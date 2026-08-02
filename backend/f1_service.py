@@ -247,3 +247,25 @@ def get_events(year: int):
             "has_sprint": event['EventFormat'] in ['sprint', 'sprint_qualifying', 'sprint_shootout']
         })
     return result
+
+def get_driver_stats(driver_code: str):
+    """Get driver career statistics from F1 API."""
+    enable_cache()
+    try:
+        ergast = fastf1.api.get_driver(driver_code)
+        if ergast is None:
+            return None
+        return {
+            "code": driver_code,
+            "first_name": ergast.get('givenName', ''),
+            "last_name": ergast.get('familyName', ''),
+            "nationality": ergast.get('nationality', ''),
+            "dob": ergast.get('dateOfBirth', ''),
+            "wins": ergast.get('wins', 0),
+            "poles": ergast.get('poles', 0),
+            "fastest_laps": ergast.get('fastestLaps', 0),
+            "championships": ergast.get('championships', 0),
+        }
+    except Exception as e:
+        print(f"Error fetching driver stats for {driver_code}: {e}")
+        return None
